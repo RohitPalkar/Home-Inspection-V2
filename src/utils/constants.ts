@@ -1,0 +1,62 @@
+import type { StepKey, SurveyData } from "@/types/survey";
+
+export const initialData: SurveyData = {
+  editMode: false,
+  firstName: "John",
+  lastName: "Doe",
+  street: "1234 Test Drive",
+  city: "Test City",
+  state: "WI",
+  zip: "96765",
+  phone: "1234567890",
+  occupancy: "",
+  ownerOccupiedType: "",
+  ownerRentsPortion: "",
+  rentalType: "",
+  vacantFurnished: "",
+  yearBuilt: "",
+  amperage: "",
+  plumbingMaterial: "",
+  heatingFuel: "",
+  oilTankUnderground: false,
+  njCompliance: "",
+  wiring: [],
+  panel: "",
+  roofAge: "",
+  homeYearSelect: "",
+  basement: "",
+  basementPhotos: [],
+  businessTypes: [],
+  otherBusinessDesc: "",
+  hasPool: "",
+  poolLocation: "",
+  poolGated: "",
+  poolFilled: "",
+  poolEmptyReason: "",
+  uploads: {},
+};
+
+export const PROGRESS: Partial<Record<StepKey, number>> = {
+  verify: 3,
+  occupancy: 7,
+  infrastructure: 12,
+  wiring: 16,
+  panel: 23,
+  "property-details": 35,
+  business: 50,
+  photos: 75,
+  review: 90,
+  success: 100,
+};
+
+export const WIRING_OPTIONS = [
+  "Romex",
+  "BX",
+  "Conduit",
+  "Knob and Tube",
+  "Aluminum",
+  "Other",
+  "Unknown",
+];
+
+export const BUSINESS_OPTIONS = ["Day Care", "Farm", "None", "Other Business Type"];
