@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Shell } from "@/components/layout/Shell";
 import { HelpOverlay } from "@/components/common/HelpOverlay";
 import { DefaultHelpBody } from "@/components/common/DefaultHelpBody";
@@ -41,6 +41,18 @@ export function SurveyApp() {
       return h.slice(0, -1);
     });
   };
+
+  const hasUnsavedChanges =
+    step !== "welcome" && step !== "optout" && step !== "optout-confirmed" && step !== "success";
+
+  useEffect(() => {
+    if (!hasUnsavedChanges) return;
+    const handler = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+    };
+    window.addEventListener("beforeunload", handler);
+    return () => window.removeEventListener("beforeunload", handler);
+  }, [hasUnsavedChanges]);
 
   const progress = PROGRESS[step] ?? null;
   const effectiveProgress = step === "verify" && data.editMode ? 5 : progress;
