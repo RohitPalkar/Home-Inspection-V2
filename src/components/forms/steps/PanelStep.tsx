@@ -13,6 +13,58 @@ interface PanelStepProps {
 }
 
 export function PanelStep({ data, update, onNext, onBack, onHelp }: PanelStepProps) {
+  const openDefs = () =>
+    onHelp({
+      title: "Panel Examples",
+      wide: true,
+      body: (
+        <div className="space-y-5">
+          <p className="text-muted-foreground">
+            Electrical panels are typically located in a utility area of the home such as a garage,
+            basement, or utility closet. They may also be located outside the home.
+          </p>
+          <div className="space-y-2">
+            <h4 className="font-semibold text-foreground">Breaker panel</h4>
+            <img
+              className="aspect-video rounded-lg object-cover w-full"
+              src="/images/breaker-panel.webp"
+              alt="Breaker panel example"
+              onError={(e) => {
+                const img = e.currentTarget;
+                if (img.src.endsWith(".webp")) {
+                  img.src = img.src.replace(".webp", ".jpg");
+                } else if (img.src.endsWith(".jpg")) {
+                  img.src = img.src.replace(".jpg", ".jpeg");
+                }
+              }}
+            />
+            <p className="text-sm text-muted-foreground">
+              Breaker panel could be located inside or outside your home. It uses circuit breakers
+              to protect electrical circuits from overcurrent.
+            </p>
+          </div>
+          <div className="space-y-2">
+            <h4 className="font-semibold text-foreground">Fuse panel</h4>
+            <img
+              className="aspect-video rounded-lg object-cover w-full"
+              src="/images/fuse-panel.jpg"
+              alt="Fuse panel example"
+              onError={(e) => {
+                const img = e.currentTarget;
+                if (img.src.endsWith(".jpg")) {
+                  img.src = img.src.replace(".jpg", ".jpeg");
+                }
+              }}
+            />
+            <p className="text-sm text-muted-foreground">
+              Fuse panel could be located inside or outside your home. It uses fuses that melt to
+              break the circuit when too much current flows.
+            </p>
+          </div>
+        </div>
+      ),
+    });
+
   return (
     <div className="max-w-2xl mx-auto">
       <StepCard className="p-6 sm:p-8">
@@ -43,44 +95,8 @@ export function PanelStep({ data, update, onNext, onBack, onHelp }: PanelStepPro
           />
         </div>
 
-        <div className="mt-5 flex flex-wrap gap-4 sm:gap-8 justify-center">
-          <HelpLink
-            label="What is a breaker panel?"
-            onClick={() =>
-              onHelp({
-                title: "Breaker Panels",
-                body: (
-                  <div className="space-y-3">
-                    <p>
-                      Breaker panel could be located inside or outside your home and looks like
-                      this:
-                    </p>
-                    <div className="aspect-video rounded-lg bg-muted grid place-items-center text-xs text-muted-foreground">
-                      /placeholder-breaker-panel.jpg
-                    </div>
-                  </div>
-                ),
-              })
-            }
-          />
-          <HelpLink
-            label="What is a fuse panel?"
-            onClick={() =>
-              onHelp({
-                title: "Fuse Panels",
-                body: (
-                  <div className="space-y-3">
-                    <p>
-                      Fuse panel could be located inside or outside your home, and looks like this:
-                    </p>
-                    <div className="aspect-video rounded-lg bg-muted grid place-items-center text-xs text-muted-foreground">
-                      /placeholder-fuse-panel.jpg
-                    </div>
-                  </div>
-                ),
-              })
-            }
-          />
+        <div className="mt-4 text-center">
+          <HelpLink label="What are the different types of panels?" onClick={openDefs} />
         </div>
 
         <NavFooter onBack={onBack} onNext={onNext} nextDisabled={!data.panel} />
