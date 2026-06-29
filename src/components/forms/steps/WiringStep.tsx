@@ -56,17 +56,22 @@ export function WiringStep({ data, update, onNext, onBack, onHelp }: WiringStepP
           ].map((w) => (
             <div key={w.title} className="space-y-2">
               <h4 className="font-semibold text-foreground">{w.title}</h4>
-              <div
-                className="aspect-video rounded-lg bg-muted grid place-items-center text-xs text-muted-foreground"
-                aria-label={`Placeholder image for ${w.title}`}
-              >
-                /placeholder-
-                {w.title
+              <img
+                className="aspect-video rounded-lg object-cover w-full"
+                src={`/images/${w.title
                   .toLowerCase()
                   .replace(/\s+&\s+/, "-")
-                  .replace(/\s+/g, "-")}
-                .jpg
-              </div>
+                  .replace(/\s+/g, "-")}.jpg`}
+                alt={`${w.title} example`}
+                onError={(e) => {
+                  const img = e.currentTarget;
+                  if (img.src.endsWith(".jpg")) {
+                    img.src = img.src.replace(".jpg", ".webp");
+                  } else if (img.src.endsWith(".webp")) {
+                    img.src = img.src.replace(".webp", ".jpeg");
+                  }
+                }}
+              />
               <p className="text-sm text-muted-foreground">{w.desc}</p>
             </div>
           ))}
