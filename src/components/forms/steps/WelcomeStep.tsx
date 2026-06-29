@@ -32,14 +32,14 @@ export function WelcomeStep({ onStart, onOptOut }: WelcomeStepProps) {
         </section>
 
         <div
-          className="grid min-[375px]:grid-cols-3 grid-cols-2 gap-2 sm:gap-6 p-3 sm:p-5 rounded-xl bg-card border border-border shadow-sm"
+          className="grid max-md:grid-cols-1 grid-cols-2 min-[375px]:grid-cols-3 max-md:gap-3 gap-2 sm:gap-6 max-md:p-0 p-3 sm:p-5 max-md:bg-transparent max-md:border-none max-md:shadow-none rounded-xl bg-card border border-border shadow-sm"
           role="list"
           aria-label="Survey overview"
         >
           {METRICS.map((m, i) => (
             <div
               key={m.label}
-              className="flex items-center justify-center sm:justify-start gap-2 sm:gap-3 min-w-0"
+              className="flex items-center justify-center sm:justify-start gap-2 sm:gap-3 min-w-0 max-md:rounded-xl max-md:bg-card max-md:border max-md:border-border max-md:shadow-sm max-md:p-4"
               role="listitem"
             >
               <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-lg bg-accent grid place-items-center shrink-0">
@@ -62,24 +62,9 @@ export function WelcomeStep({ onStart, onOptOut }: WelcomeStepProps) {
             </div>
           ))}
         </div>
-
-        <div className="flex flex-col sm:flex-row gap-3">
-          <button
-            onClick={onStart}
-            className="flex-1 min-h-[56px] rounded-xl bg-primary text-primary-foreground font-bold hover:bg-primary-hover transition text-lg"
-          >
-            Start Self-Survey
-          </button>
-          <button
-            onClick={onOptOut}
-            className="flex-1 min-h-[56px] rounded-xl border-2 border-border bg-card text-foreground font-semibold hover:bg-muted transition"
-          >
-            Request Inspector Visit
-          </button>
-        </div>
       </div>
 
-      <div className="bg-card rounded-2xl shadow-elevated border border-border p-6 sm:p-8 max-lg:order-first">
+      <div className="bg-card rounded-2xl shadow-elevated border border-border p-6 sm:p-8">
         <h2 className="font-bold text-foreground text-lg">Before you start, make sure you have:</h2>
         <ul className="mt-4 space-y-4">
           {CHECKLIST.map((item) => (
@@ -94,6 +79,21 @@ export function WelcomeStep({ onStart, onOptOut }: WelcomeStepProps) {
             </li>
           ))}
         </ul>
+      </div>
+
+      <div className="flex flex-col sm:flex-row gap-3 lg:col-start-1 lg:col-end-2 lg:row-start-2">
+        <button
+          onClick={onStart}
+          className="flex-1 min-h-[56px] rounded-xl bg-primary text-primary-foreground font-bold hover:bg-primary-hover transition text-lg"
+        >
+          Start Self-Survey
+        </button>
+        <button
+          onClick={onOptOut}
+          className="flex-1 min-h-[56px] rounded-xl border-2 border-border bg-card text-foreground font-semibold hover:bg-muted transition"
+        >
+          Request Inspector Visit
+        </button>
       </div>
     </div>
   );
