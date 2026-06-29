@@ -1,3 +1,4 @@
+import { ChevronRight } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Shell } from "@/components/layout/Shell";
 import { HelpOverlay } from "@/components/common/HelpOverlay";
@@ -48,6 +49,35 @@ const FAQS = [
     a: "Absolutely. You can opt-out at any time to request an in-person inspector accommodation.",
   },
 ];
+
+function FaqAccordion() {
+  const [open, setOpen] = useState<number | null>(null);
+
+  return (
+    <div className="divide-y divide-border">
+      {FAQS.map((f, i) => (
+        <div key={f.q}>
+          <button
+            onClick={() => setOpen(open === i ? null : i)}
+            className="w-full flex items-center justify-between gap-3 py-3 text-left min-h-[44px]"
+            aria-expanded={open === i}
+            aria-controls={`faq-answer-${i}`}
+          >
+            <span className="font-semibold text-foreground text-sm">{f.q}</span>
+            <ChevronRight
+              className={`w-4 h-4 text-muted-foreground transition-transform shrink-0 ${open === i ? "rotate-90" : ""}`}
+            />
+          </button>
+          {open === i && (
+            <p id={`faq-answer-${i}`} className="pb-3 text-sm text-muted-foreground" role="region">
+              {f.a}
+            </p>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
 
 export function SurveyApp() {
   const [step, setStep] = useState<StepKey>("welcome");
@@ -107,16 +137,7 @@ export function SurveyApp() {
             onHelp={() =>
               setHelp({
                 title: "Frequently Asked Questions",
-                body: (
-                  <div className="divide-y divide-border">
-                    {FAQS.map((f) => (
-                      <div key={f.q} className="py-3 first:pt-0 last:pb-0">
-                        <h4 className="font-semibold text-foreground text-sm">{f.q}</h4>
-                        <p className="mt-1 text-sm text-muted-foreground">{f.a}</p>
-                      </div>
-                    ))}
-                  </div>
-                ),
+                body: <FaqAccordion />,
               })
             }
           />
