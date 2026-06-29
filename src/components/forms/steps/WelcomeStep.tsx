@@ -32,20 +32,20 @@ export function WelcomeStep({ onStart, onOptOut }: WelcomeStepProps) {
         </section>
 
         <div
-          className="flex items-center gap-2 sm:gap-6 p-3 sm:p-5 rounded-xl bg-card border border-border shadow-sm max-sm:flex-wrap max-sm:justify-center"
+          className="grid min-[375px]:grid-cols-3 grid-cols-2 gap-2 sm:gap-6 p-3 sm:p-5 rounded-xl bg-card border border-border shadow-sm"
           role="list"
           aria-label="Survey overview"
         >
           {METRICS.map((m, i) => (
             <div
               key={m.label}
-              className="flex-1 flex items-center gap-2 sm:gap-3 min-w-0 max-sm:basis-[45%] max-sm:flex-none"
+              className="flex items-center justify-center sm:justify-start gap-2 sm:gap-3 min-w-0"
               role="listitem"
             >
               <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-lg bg-accent grid place-items-center shrink-0">
                 <m.icon className="w-3 h-3 sm:w-4 sm:h-4 text-primary" aria-hidden="true" />
               </div>
-              <div className="min-w-0">
+              <div className="min-w-0 text-center sm:text-left">
                 <div className="font-bold text-foreground text-xs sm:text-base leading-tight">
                   {m.value}
                 </div>
