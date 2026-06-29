@@ -10,9 +10,49 @@ interface HelpOverlayProps {
   wide?: boolean;
 }
 
+function TabletDrawer({
+  title,
+  children,
+  wide,
+  closeRef,
+  onClose,
+}: {
+  title: string;
+  children: ReactNode;
+  wide?: boolean;
+  closeRef: React.RefObject<HTMLButtonElement | null>;
+  onClose: () => void;
+}) {
+  return (
+    <div className="fixed inset-0 z-50" role="dialog" aria-modal="true" aria-label={title}>
+      <div className="absolute inset-0 bg-black/40" onClick={onClose} />
+      <div
+        className="absolute right-0 top-0 h-full bg-card shadow-elevated flex flex-col"
+        style={{ width: wide ? 440 : 380 }}
+      >
+        <div className="flex items-center justify-between px-5 py-4 border-b border-border">
+          <h3 className="text-lg font-semibold text-foreground">{title}</h3>
+          <button
+            ref={closeRef}
+            aria-label="Close help panel"
+            onClick={onClose}
+            className="w-10 h-10 rounded-full hover:bg-muted grid place-items-center"
+          >
+            <X className="w-5 h-5" aria-hidden="true" />
+          </button>
+        </div>
+        <div className="overflow-y-auto px-5 py-4 flex-1 text-sm text-foreground/90 space-y-4">
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function HelpOverlay({ open, onClose, title, children, wide }: HelpOverlayProps) {
   const isMobile = useMediaQuery("(max-width: 767px)");
   const isTablet = useMediaQuery("(min-width: 768px) and (max-width: 1023px)");
+  const isTabletLandscape = useMediaQuery("(min-width: 1024px) and (max-width: 1366px)");
   const closeRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
@@ -57,30 +97,15 @@ export function HelpOverlay({ open, onClose, title, children, wide }: HelpOverla
     );
   }
 
-  if (isTablet) {
+  if (isTablet || isTabletLandscape) {
     return (
-      <div className="fixed inset-0 z-50" role="dialog" aria-modal="true" aria-label={title}>
-        <div className="absolute inset-0 bg-black/40" onClick={onClose} />
-        <div
-          className="absolute right-0 top-0 h-full bg-card shadow-elevated flex flex-col"
-          style={{ width: wide ? 440 : 380 }}
-        >
-          <div className="flex items-center justify-between px-5 py-4 border-b border-border">
-            <h3 className="text-lg font-semibold text-foreground">{title}</h3>
-            <button
-              ref={closeRef}
-              aria-label="Close help panel"
-              onClick={onClose}
-              className="w-10 h-10 rounded-full hover:bg-muted grid place-items-center"
-            >
-              <X className="w-5 h-5" aria-hidden="true" />
-            </button>
-          </div>
-          <div className="overflow-y-auto px-5 py-4 flex-1 text-sm text-foreground/90 space-y-4">
-            {children}
-          </div>
-        </div>
-      </div>
+      <TabletDrawer
+        title={title}
+        children={children}
+        wide={wide}
+        closeRef={closeRef}
+        onClose={onClose}
+      />
     );
   }
 
