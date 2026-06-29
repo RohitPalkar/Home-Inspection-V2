@@ -3,6 +3,7 @@ import { Clock, CheckCircle2, Smartphone } from "lucide-react";
 interface WelcomeStepProps {
   onStart: () => void;
   onOptOut: () => void;
+  onHelp?: () => void;
 }
 
 const METRICS = [
@@ -17,7 +18,7 @@ const CHECKLIST = [
   { title: "Stable Internet", desc: "Required for uploading high-resolution photos securely." },
 ] as const;
 
-export function WelcomeStep({ onStart, onOptOut }: WelcomeStepProps) {
+export function WelcomeStep({ onStart, onOptOut, onHelp }: WelcomeStepProps) {
   return (
     <div className="grid lg:grid-cols-[3fr_2fr] gap-8 lg:gap-12 items-start">
       <div className="flex flex-col gap-6 sm:gap-8">
@@ -81,19 +82,29 @@ export function WelcomeStep({ onStart, onOptOut }: WelcomeStepProps) {
         </ul>
       </div>
 
-      <div className="flex flex-col sm:flex-row gap-3 lg:col-start-1 lg:col-end-2 lg:row-start-2">
-        <button
-          onClick={onStart}
-          className="flex-1 min-h-[56px] rounded-xl bg-primary text-primary-foreground font-bold hover:bg-primary-hover transition text-lg"
-        >
-          Start Self-Survey
-        </button>
-        <button
-          onClick={onOptOut}
-          className="flex-1 min-h-[56px] rounded-xl border-2 border-border bg-card text-foreground font-semibold hover:bg-muted transition"
-        >
-          Request Inspector Visit
-        </button>
+      <div className="flex flex-col gap-3 lg:col-start-1 lg:col-end-2 lg:row-start-2">
+        <div className="flex flex-col sm:flex-row gap-3">
+          <button
+            onClick={onStart}
+            className="flex-1 min-h-[56px] rounded-xl bg-primary text-primary-foreground font-bold hover:bg-primary-hover transition text-lg"
+          >
+            Start Self-Survey
+          </button>
+          <button
+            onClick={onOptOut}
+            className="flex-1 min-h-[56px] rounded-xl border-2 border-border bg-card text-foreground font-semibold hover:bg-muted transition"
+          >
+            Request Inspector Visit
+          </button>
+        </div>
+        {onHelp && (
+          <button
+            onClick={onHelp}
+            className="text-sm text-muted-foreground underline underline-offset-2 hover:text-foreground transition self-center"
+          >
+            View frequently asked questions
+          </button>
+        )}
       </div>
     </div>
   );

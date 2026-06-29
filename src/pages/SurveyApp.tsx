@@ -5,7 +5,6 @@ import { DefaultHelpBody } from "@/components/common/DefaultHelpBody";
 import { WelcomeStep } from "@/components/forms/steps/WelcomeStep";
 import { OptOutStep } from "@/components/forms/steps/OptOutStep";
 import { OptOutConfirmed } from "@/components/forms/steps/OptOutConfirmed";
-import { FaqStep } from "@/components/forms/steps/FaqStep";
 import { VerifyStep } from "@/components/forms/steps/VerifyStep";
 import { OccupancyStep } from "@/components/forms/steps/OccupancyStep";
 import { InfrastructureStep } from "@/components/forms/steps/InfrastructureStep";
@@ -18,6 +17,37 @@ import { ReviewStep } from "@/components/forms/steps/ReviewStep";
 import { SuccessStep } from "@/components/forms/steps/SuccessStep";
 import { initialData, PROGRESS } from "@/utils/constants";
 import type { StepKey, SurveyData, HelpContent } from "@/types/survey";
+
+const FAQS = [
+  {
+    q: "What is a self-survey?",
+    a: "A self-survey is a guided process that lets you document the condition of your property by answering questions and uploading photos from your own device.",
+  },
+  {
+    q: "Is the self-survey required?",
+    a: "It's the fastest, most convenient option. If you prefer, you can opt-out and request an in-person inspector visit.",
+  },
+  {
+    q: "What is required to complete the self-survey?",
+    a: "A smartphone, tablet, or computer with a camera; stable internet; and approximately 15-20 minutes to complete.",
+  },
+  {
+    q: "Is my information secure?",
+    a: "Yes. All submissions are encrypted in transit and stored securely in accordance with our privacy standards.",
+  },
+  {
+    q: "What are the benefits of the self-survey?",
+    a: "Faster turnaround, no need to schedule an inspector visit, and you complete it on your own time.",
+  },
+  {
+    q: "What if I have a vacation home or rental property, and I'm not there to take the photos?",
+    a: "A trusted representative, tenant, or property manager may complete the photos on your behalf.",
+  },
+  {
+    q: "Can I have an inspector visit my home due to accessibility needs?",
+    a: "Absolutely. You can opt-out at any time to request an in-person inspector accommodation.",
+  },
+];
 
 export function SurveyApp() {
   const [step, setStep] = useState<StepKey>("welcome");
@@ -71,7 +101,25 @@ export function SurveyApp() {
         progress={effectiveProgress}
       >
         {step === "welcome" && (
-          <WelcomeStep onStart={() => goTo("faq")} onOptOut={() => goTo("optout")} />
+          <WelcomeStep
+            onStart={() => goTo("verify")}
+            onOptOut={() => goTo("optout")}
+            onHelp={() =>
+              setHelp({
+                title: "Frequently Asked Questions",
+                body: (
+                  <div className="divide-y divide-border">
+                    {FAQS.map((f) => (
+                      <div key={f.q} className="py-3 first:pt-0 last:pb-0">
+                        <h4 className="font-semibold text-foreground text-sm">{f.q}</h4>
+                        <p className="mt-1 text-sm text-muted-foreground">{f.a}</p>
+                      </div>
+                    ))}
+                  </div>
+                ),
+              })
+            }
+          />
         )}
         {step === "optout" && (
           <OptOutStep
@@ -80,7 +128,6 @@ export function SurveyApp() {
           />
         )}
         {step === "optout-confirmed" && <OptOutConfirmed onReturn={() => setStep("welcome")} />}
-        {step === "faq" && <FaqStep onNext={() => goTo("verify")} onBack={goBack} />}
         {step === "verify" && (
           <VerifyStep
             data={data}
