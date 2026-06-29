@@ -32,7 +32,7 @@ export function WelcomeStep({ onStart, onOptOut }: WelcomeStepProps) {
         </section>
 
         <div
-          className="grid max-md:grid-cols-1 grid-cols-2 min-[375px]:grid-cols-3 max-md:gap-3 gap-2 sm:gap-6 max-md:p-0 p-3 sm:p-5 max-md:bg-transparent max-md:border-none max-md:shadow-none rounded-xl bg-card border border-border shadow-sm"
+          className="grid max-md:grid-cols-1 md:grid-cols-3 max-md:gap-3 md:gap-6 max-md:p-0 md:p-5 max-md:bg-transparent max-md:border-none max-md:shadow-none rounded-xl bg-card border border-border shadow-sm"
           role="list"
           aria-label="Survey overview"
         >
