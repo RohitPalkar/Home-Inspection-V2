@@ -23,6 +23,7 @@
     ]
   },
   "dependencies": {
+    "@fontsource/inter": "^5.2.8",
     "@hookform/resolvers": "^5.4.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.575.0",
