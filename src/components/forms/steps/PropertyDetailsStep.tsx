@@ -1,9 +1,8 @@
-import { useMemo } from "react";
 import { Home } from "lucide-react";
 import { StepCard } from "@/components/forms/StepCard";
 import { FieldLabel } from "@/components/forms/FieldLabel";
 import { RadioRow } from "@/components/forms/RadioRow";
-import { Select } from "@/components/forms/Select";
+import { YearPicker } from "@/components/forms/YearPicker";
 import { NavFooter } from "@/components/forms/NavFooter";
 import { FileDropZone } from "@/components/forms/FileDropZone";
 import type { SurveyData, SurveyUpdater } from "@/types/survey";
@@ -16,12 +15,6 @@ interface PropertyDetailsStepProps {
 }
 
 export function PropertyDetailsStep({ data, update, onNext, onBack }: PropertyDetailsStepProps) {
-  const years = useMemo(() => {
-    const arr: string[] = [];
-    for (let y = new Date().getFullYear(); y >= 1850; y--) arr.push(String(y));
-    return arr;
-  }, []);
-
   return (
     <div className="max-w-3xl mx-auto">
       <div>
@@ -69,15 +62,11 @@ export function PropertyDetailsStep({ data, update, onNext, onBack }: PropertyDe
 
         <div className="mb-6">
           <FieldLabel required>2. What is the year your home was built?</FieldLabel>
-          <Select
+          <YearPicker
             value={data.homeYearSelect}
-            onChange={(e) => update("homeYearSelect", e.target.value)}
-          >
-            <option value="">Select year built</option>
-            {years.map((y) => (
-              <option key={y}>{y}</option>
-            ))}
-          </Select>
+            onChange={(v) => update("homeYearSelect", v)}
+            placeholder="e.g. 1985"
+          />
         </div>
 
         <div className="mb-6">

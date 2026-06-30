@@ -1,7 +1,7 @@
 import { Home } from "lucide-react";
 import { StepCard } from "@/components/forms/StepCard";
 import { FieldLabel } from "@/components/forms/FieldLabel";
-import { Input } from "@/components/forms/Input";
+import { YearPicker } from "@/components/forms/YearPicker";
 import { Select } from "@/components/forms/Select";
 import { NavFooter } from "@/components/forms/NavFooter";
 import type { SurveyData, SurveyUpdater } from "@/types/survey";
@@ -35,11 +35,10 @@ export function InfrastructureStep({ data, update, onNext, onBack }: Infrastruct
         <div className="mt-6 space-y-5">
           <div>
             <FieldLabel required>Year Home Built</FieldLabel>
-            <Input
-              type="number"
-              placeholder="e.g. 1985"
+            <YearPicker
               value={data.yearBuilt}
-              onChange={(e) => update("yearBuilt", e.target.value)}
+              onChange={(v) => update("yearBuilt", v)}
+              placeholder="e.g. 1985"
             />
             {isHistoric && (
               <div className="mt-3 p-4 rounded-lg border border-warning/40 bg-warning/10 text-sm">
