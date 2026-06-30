@@ -173,6 +173,7 @@ export function SurveyApp() {
             update={update}
             onNext={() => goTo("wiring")}
             onBack={goBack}
+            onHelp={(p) => setHelp(p)}
           />
         )}
         {step === "wiring" && (

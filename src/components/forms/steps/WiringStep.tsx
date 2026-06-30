@@ -1,4 +1,3 @@
-import { Zap } from "lucide-react";
 import { StepCard } from "@/components/forms/StepCard";
 import { CheckRow } from "@/components/forms/CheckRow";
 import { HelpLink } from "@/components/forms/HelpLink";
@@ -85,12 +84,7 @@ export function WiringStep({ data, update, onNext, onBack, onHelp }: WiringStepP
   return (
     <div className="max-w-2xl mx-auto">
       <StepCard className="p-6 sm:p-8">
-        <div className="flex items-center gap-3 mb-4">
-          <div className="w-10 h-10 rounded-lg bg-accent grid place-items-center">
-            <Zap className="w-5 h-5 text-primary" />
-          </div>
-          <SectionHeader section={SURVEY_SECTIONS.wiring} className="mb-0" />
-        </div>
+        <SectionHeader section={SURVEY_SECTIONS.wiring} />
 
         <div className="mt-6 space-y-3">
           {WIRING_OPTIONS.map((o) => (

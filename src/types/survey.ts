@@ -34,7 +34,10 @@ export interface SurveyData {
   amperage: string;
   plumbingMaterial: string;
   heatingFuel: string;
+  gasMeterPresent: boolean;
   oilTankUnderground: boolean;
+  baseboardHeating: boolean;
+  propaneTankLocation: "" | "above-ground" | "underground";
   njCompliance: string;
   wiring: string[];
   panel: "" | "breaker" | "fuse" | "both" | "unknown";
@@ -59,3 +62,29 @@ export interface HelpContent {
 }
 
 export type SurveyUpdater = <K extends keyof SurveyData>(key: K, value: SurveyData[K]) => void;
+
+export interface HelpLinkDef {
+  label: string;
+  entryKey: string;
+}
+
+export interface ConditionalQuestionConfig {
+  id: keyof SurveyData;
+  label: string;
+  required?: boolean;
+  questionHelp?: HelpLinkDef;
+  options: { label: string; value: string }[];
+}
+
+export interface RadioQuestionConfig {
+  id: keyof SurveyData;
+  label: string;
+  required?: boolean;
+  questionHelp?: HelpLinkDef;
+  options: {
+    label: string;
+    value: string;
+    optionHelp?: HelpLinkDef;
+    showQuestion?: ConditionalQuestionConfig;
+  }[];
+}
