@@ -4,6 +4,7 @@ import { HelpLink } from "@/components/forms/HelpLink";
 import { NavFooter } from "@/components/forms/NavFooter";
 import { SectionHeader } from "@/components/forms/SectionHeader";
 import { SURVEY_SECTIONS } from "@/config/survey";
+import { openHelp } from "@/components/forms/help-utils";
 import type { SurveyData, SurveyUpdater, HelpContent } from "@/types/survey";
 
 interface OccupancyStepProps {
@@ -15,30 +16,6 @@ interface OccupancyStepProps {
 }
 
 export function OccupancyStep({ data, update, onNext, onBack, onHelp }: OccupancyStepProps) {
-  const openDefs = () =>
-    onHelp({
-      title: "Occupancy Definitions",
-      body: (
-        <div className="space-y-4">
-          <p>
-            <strong>Owner Occupied</strong> — Choose this option if the home is currently furnished
-            or occupied, or if it WILL BE furnished or occupied within 90 days of the policy issue
-            date.
-          </p>
-          <p>
-            <strong>Rental - Tenant Occupied</strong> — Choose this option if the home is a rental
-            property that is currently occupied by a tenant, or will be tenant-occupied within 90
-            days of the policy issue date.
-          </p>
-          <p>
-            <strong>Vacant</strong> — Choose this option if the home is currently unfurnished or
-            unoccupied, and WILL NOT be furnished or occupied within 90 days of the policy issue
-            date.
-          </p>
-        </div>
-      ),
-    });
-
   return (
     <div className="max-w-2xl mx-auto">
       <StepCard className="p-6 sm:p-8">
@@ -63,7 +40,7 @@ export function OccupancyStep({ data, update, onNext, onBack, onHelp }: Occupanc
         </div>
 
         <div className="mt-4 text-center">
-          <HelpLink label="What are the different occupancy types?" onClick={openDefs} />
+          <HelpLink label="What is dwelling type?" onClick={() => openHelp("dwelling-type", onHelp)} />
         </div>
 
         {data.occupancy === "owner" && (

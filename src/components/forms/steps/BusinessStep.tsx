@@ -2,20 +2,23 @@ import { StepCard } from "@/components/forms/StepCard";
 import { CheckRow } from "@/components/forms/CheckRow";
 import { RadioRow } from "@/components/forms/RadioRow";
 import { FieldLabel } from "@/components/forms/FieldLabel";
+import { HelpLink } from "@/components/forms/HelpLink";
 import { NavFooter } from "@/components/forms/NavFooter";
 import { SectionHeader } from "@/components/forms/SectionHeader";
 import { SURVEY_SECTIONS } from "@/config/survey";
 import { BUSINESS_OPTIONS } from "@/utils/constants";
-import type { SurveyData, SurveyUpdater } from "@/types/survey";
+import { openHelp } from "@/components/forms/help-utils";
+import type { SurveyData, SurveyUpdater, HelpContent } from "@/types/survey";
 
 interface BusinessStepProps {
   data: SurveyData;
   update: SurveyUpdater;
   onNext: () => void;
   onBack: () => void;
+  onHelp?: (p: HelpContent) => void;
 }
 
-export function BusinessStep({ data, update, onNext, onBack }: BusinessStepProps) {
+export function BusinessStep({ data, update, onNext, onBack, onHelp }: BusinessStepProps) {
   const toggle = (o: string) => {
     const set = new Set(data.businessTypes);
     if (set.has(o)) set.delete(o);
@@ -67,6 +70,11 @@ export function BusinessStep({ data, update, onNext, onBack }: BusinessStepProps
               onClick={() => update("hasPool", "no")}
             />
           </div>
+          {onHelp && (
+            <div className="mt-1.5">
+              <HelpLink label="What is a swimming pool enclosure?" onClick={() => openHelp("swimming-pool-enclosure", onHelp)} />
+            </div>
+          )}
         </div>
 
         {data.hasPool === "yes" && (
@@ -101,6 +109,9 @@ export function BusinessStep({ data, update, onNext, onBack }: BusinessStepProps
                   checked={data.poolGated === "no"}
                   onClick={() => update("poolGated", "no")}
                 />
+              </div>
+              <div className="mt-1.5">
+                <HelpLink label="What are pool safety enclosure requirements?" onClick={() => openHelp("pool-safety-enclosure", onHelp)} />
               </div>
             </div>
             <div>

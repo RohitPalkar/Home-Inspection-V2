@@ -200,10 +200,17 @@ export function SurveyApp() {
             update={update}
             onNext={() => goTo("business")}
             onBack={goBack}
+            onHelp={(p) => setHelp(p)}
           />
         )}
         {step === "business" && (
-          <BusinessStep data={data} update={update} onNext={() => goTo("photos")} onBack={goBack} />
+          <BusinessStep
+            data={data}
+            update={update}
+            onNext={() => goTo("photos")}
+            onBack={goBack}
+            onHelp={(p) => setHelp(p)}
+          />
         )}
         {step === "photos" && (
           <PhotosStep

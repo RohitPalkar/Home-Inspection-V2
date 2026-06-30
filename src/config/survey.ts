@@ -22,10 +22,6 @@ export const HEATING_QUESTION: RadioQuestionConfig = {
     {
       label: "Gas",
       value: "gas",
-      optionHelp: {
-        label: "What is a gas heating system?",
-        entryKey: "gas-heating",
-      },
       showQuestion: {
         id: "gasMeterPresent",
         label: "Gas Meter Present?",
@@ -42,10 +38,6 @@ export const HEATING_QUESTION: RadioQuestionConfig = {
     {
       label: "Electric",
       value: "electric",
-      optionHelp: {
-        label: "What is electric heating?",
-        entryKey: "electric-heating",
-      },
       showQuestion: {
         id: "baseboardHeating",
         label: "Does the home use electric baseboard heating?",
@@ -62,10 +54,6 @@ export const HEATING_QUESTION: RadioQuestionConfig = {
     {
       label: "Oil",
       value: "oil",
-      optionHelp: {
-        label: "What is an oil heating system?",
-        entryKey: "oil-heating",
-      },
       showQuestion: {
         id: "oilTankUnderground",
         label: "Is the oil tank underground?",
@@ -82,10 +70,6 @@ export const HEATING_QUESTION: RadioQuestionConfig = {
     {
       label: "Propane",
       value: "propane",
-      optionHelp: {
-        label: "What is propane heating?",
-        entryKey: "propane-heating",
-      },
       showQuestion: {
         id: "propaneTankLocation",
         label: "Where is the propane tank located?",

@@ -2,10 +2,12 @@ import { StepCard } from "@/components/forms/StepCard";
 import { FieldLabel } from "@/components/forms/FieldLabel";
 import { YearPicker } from "@/components/forms/YearPicker";
 import { Select } from "@/components/forms/Select";
+import { HelpLink } from "@/components/forms/HelpLink";
 import { NavFooter } from "@/components/forms/NavFooter";
 import { SectionHeader } from "@/components/forms/SectionHeader";
 import { DynamicQuestion } from "@/components/forms/DynamicQuestion";
 import { SURVEY_SECTIONS, HEATING_QUESTION } from "@/config/survey";
+import { openHelp } from "@/components/forms/help-utils";
 import type { SurveyData, SurveyUpdater, HelpContent } from "@/types/survey";
 
 interface InfrastructureStepProps {
@@ -59,6 +61,11 @@ export function InfrastructureStep({ data, update, onNext, onBack, onHelp }: Inf
               <option value="200">200 amp</option>
               <option value="200+">200+ amp</option>
             </Select>
+            {onHelp && (
+              <div className="mt-1.5">
+                <HelpLink label="What are protective devices?" onClick={() => openHelp("protective-devices", onHelp)} />
+              </div>
+            )}
           </div>
 
           <div>
@@ -74,6 +81,11 @@ export function InfrastructureStep({ data, update, onNext, onBack, onHelp }: Inf
               <option>Galvanized</option>
               <option>Polybutylene</option>
             </Select>
+            {onHelp && (
+              <div className="mt-1.5">
+                <HelpLink label="What is plumbing material?" onClick={() => openHelp("plumbing-material", onHelp)} />
+              </div>
+            )}
           </div>
 
           <div>

@@ -1,47 +1,8 @@
 import { FieldLabel } from "@/components/forms/FieldLabel";
 import { RadioRow } from "@/components/forms/RadioRow";
 import { HelpLink } from "@/components/forms/HelpLink";
-import { HELP } from "@/config/help";
-import type {
-  SurveyData,
-  SurveyUpdater,
-  HelpContent,
-  RadioQuestionConfig,
-  ConditionalQuestionConfig,
-  HelpLinkDef,
-} from "@/types/survey";
-
-interface DynamicQuestionProps {
-  config: RadioQuestionConfig;
-  data: SurveyData;
-  update: SurveyUpdater;
-  onHelp: (c: HelpContent) => void;
-}
-
-function toHelpContent(entryKey: string): HelpContent {
-  const entry = HELP[entryKey];
-  if (!entry) {
-    return { title: entryKey, body: <p>Help content not found.</p> };
-  }
-  return {
-    title: entry.title,
-    body: (
-      <div className="space-y-4">
-        <p className="text-muted-foreground">{entry.description}</p>
-        {entry.tips && entry.tips.length > 0 && (
-          <ul className="space-y-1">
-            {entry.tips.map((t, i) => (
-              <li key={i} className="text-sm text-muted-foreground flex gap-2">
-                <span className="text-primary shrink-0">•</span>
-                <span>{t}</span>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-    ),
-  };
-}
+import { toHelpContent } from "@/components/forms/help-utils";
+import type { SurveyData, SurveyUpdater, HelpContent, RadioQuestionConfig, ConditionalQuestionConfig, HelpLinkDef } from "@/types/survey";
 
 function HelpLinksGroup({
   links,
@@ -124,6 +85,13 @@ function ConditionalQuestion({
       )}
     </div>
   );
+}
+
+interface DynamicQuestionProps {
+  config: RadioQuestionConfig;
+  data: SurveyData;
+  update: SurveyUpdater;
+  onHelp: (c: HelpContent) => void;
 }
 
 export function DynamicQuestion({ config, data, update, onHelp }: DynamicQuestionProps) {

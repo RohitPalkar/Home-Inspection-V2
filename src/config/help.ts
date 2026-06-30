@@ -1,10 +1,19 @@
 import type { PhotoGuidanceEntry } from "@/types/survey";
 
+export interface HelpSection {
+  title: string;
+  description: string;
+  image?: { src: string; alt: string; fallbackSrc?: string[] };
+  characteristics?: string[];
+  identification?: string[];
+}
+
 export interface HelpEntry {
   title: string;
   description: string;
   image?: { src: string; alt: string; fallbackSrc?: string[] };
   tips?: string[];
+  sections?: HelpSection[];
 }
 
 export interface HelpLinkConfig {
@@ -35,9 +44,100 @@ export const HELP: Record<string, HelpEntry> = {
     },
   },
   "heating-system": {
-    title: "Heating System",
+    title: "What is a heating system?",
     description:
-      "A heating system is a mechanism that maintains temperature and comfort within a home by distributing warm air or water throughout the property. The type of fuel used affects efficiency, maintenance, and emissions.",
+      "A heating system is a mechanism that maintains temperature and comfort within a home by distributing warm air or heated water throughout the property. The type of fuel used affects efficiency, maintenance requirements, operating costs, and environmental impact.",
+    sections: [
+      {
+        title: "Gas",
+        description:
+          "Natural gas heating systems burn natural gas to generate heat and are one of the most common heating methods in residential homes.",
+        image: {
+          src: "/images/help/gas-furnace.webp",
+          alt: "Gas furnace showing burner assembly and gas supply line connections",
+          fallbackSrc: ["/images/help/gas-furnace.jpg"],
+        },
+        characteristics: [
+          "Connected to a natural gas line",
+          "Often paired with a forced-air furnace",
+          "Efficient and cost-effective",
+          "Requires annual maintenance",
+        ],
+        identification: [
+          "Gas meter located outside the home",
+          "Furnace connected to a gas supply line",
+          "Metal exhaust vent",
+        ],
+      },
+      {
+        title: "Electric",
+        description:
+          "Electric heating systems use electricity to generate heat and may include electric furnaces, baseboard heaters, or heat pumps.",
+        image: {
+          src: "/images/help/electric-heater.webp",
+          alt: "Electric baseboard heater installed along a wall with visible wiring connections",
+          fallbackSrc: ["/images/help/electric-heater.jpg"],
+        },
+        characteristics: [
+          "No combustion fuel required",
+          "Low maintenance",
+          "Quiet operation",
+          "Common in warmer climates",
+        ],
+        identification: [
+          "Electric baseboard heaters",
+          "Electric furnace",
+          "No gas or oil supply",
+          "Higher electrical demand",
+        ],
+      },
+      {
+        title: "Oil",
+        description:
+          "Oil heating systems burn heating oil stored in a fuel tank to provide heat throughout the home.",
+        image: {
+          src: "/images/help/oil-furnace.webp",
+          alt: "Oil furnace with fuel line connected to an oil storage tank",
+          fallbackSrc: ["/images/help/oil-furnace.jpg"],
+        },
+        characteristics: [
+          "Fuel stored in an indoor or outdoor tank",
+          "Common in colder climates",
+          "Requires fuel deliveries",
+          "Annual burner maintenance recommended",
+        ],
+        identification: [
+          "Oil storage tank",
+          "Oil burner",
+          "Fuel fill pipe outside the home",
+          "Chimney or vent pipe",
+        ],
+      },
+      {
+        title: "Propane",
+        description:
+          "Propane heating systems use propane gas stored in an above-ground or underground storage tank.",
+        image: {
+          src: "/images/help/propane-tank.webp",
+          alt: "White propane storage tank located outdoors with regulator and supply line",
+          fallbackSrc: ["/images/help/propane-tank.jpg"],
+        },
+        characteristics: [
+          "Common in rural areas",
+          "Delivered by a propane supplier",
+          "Clean-burning fuel",
+          "Tank located on the property",
+        ],
+        identification: [
+          "White propane storage tank",
+          "Propane regulator",
+          "Supply line entering the home",
+        ],
+      },
+    ],
+    tips: [
+      "If you are unsure which heating fuel your home uses, check the furnace area, utility room, home inspection report, or your utility bill.",
+    ],
   },
   "gas-heating": {
     title: "Gas Heating System",
@@ -98,6 +198,611 @@ export const HELP: Record<string, HelpEntry> = {
       alt: "Propane tank installation example",
       fallbackSrc: ["/images/propane-tank.jpg"],
     },
+  },
+  "wiring-types": {
+    title: "What are the different wiring types?",
+    description:
+      "The wiring in your home is primarily located inside the walls and hidden from view. It is often visible in unfinished areas such as a garage or basement. If you are unable to visibly verify the wiring type, please select \"Unknown\".",
+    sections: [
+      {
+        title: "Romex",
+        description:
+          "The most common wiring type in modern homes. Identified by its rubber outer casing which could be white, grey, black or yellow.",
+        image: {
+          src: "/images/help/romex-wiring.webp",
+          alt: "Romex electrical cable showing PVC outer sheath and inner insulated wires",
+          fallbackSrc: ["/images/help/romex-wiring.jpg"],
+        },
+        characteristics: [
+          "Non-metallic sheathed cable",
+          "Most common in homes built after 1960",
+          "Available in various gauge sizes",
+          "Used for general-purpose circuits",
+        ],
+        identification: [
+          "Flat, rectangular cable shape",
+          "PVC or rubber outer jacket",
+          "Label printed on the outer sheath",
+        ],
+      },
+      {
+        title: "BX (Armored Cable)",
+        description:
+          "BX wiring, also known as armored cable, has a flexible metal outer covering that protects the inner wires. It is commonly found in older and modern homes.",
+        image: {
+          src: "/images/help/bx-wiring.webp",
+          alt: "BX armored cable showing spiral-wound metal sheath and interior insulated wires",
+          fallbackSrc: ["/images/help/bx-wiring.jpg"],
+        },
+        characteristics: [
+          "Flexible metal armor protection",
+          "Common in both old and new construction",
+          "Provides physical protection for wires",
+          "Used in exposed locations like basements",
+        ],
+        identification: [
+          "Spiral-wrapped metal exterior",
+          "Silver or gray metallic color",
+          "Metal connector at junction boxes",
+        ],
+      },
+      {
+        title: "Conduit",
+        description:
+          "Conduit is a rigid or flexible metal or plastic tube that protects individual electrical wires. It is commonly used in commercial buildings and modern residential construction.",
+        image: {
+          src: "/images/help/conduit-wiring.webp",
+          alt: "Electrical conduit showing metal pipes with wires running through them",
+          fallbackSrc: ["/images/help/conduit-wiring.jpg"],
+        },
+        characteristics: [
+          "Rigid or flexible tubing",
+          "Individual wires pulled through",
+          "Most common in commercial buildings",
+          "Provides excellent wire protection",
+        ],
+        identification: [
+          "Metal or PVC tubes running along walls or ceilings",
+          "Wires not visible — contained inside tubes",
+          "Fittings and couplings at connections",
+        ],
+      },
+      {
+        title: "Knob and Tube",
+        description:
+          "Knob and tube wiring was commonly used in homes built from 1900 to 1940. It consists of ceramic knobs and tubes that secure individual copper wires.",
+        image: {
+          src: "/images/help/knob-tube-wiring.webp",
+          alt: "Knob and tube wiring showing white ceramic knobs and tubes with exposed copper wires",
+          fallbackSrc: ["/images/help/knob-tube-wiring.jpg"],
+        },
+        characteristics: [
+          "Found in pre-1940 homes",
+          "Individual wires, not a bundled cable",
+          "No ground wire present",
+          "May be a fire risk if damaged or modified",
+        ],
+        identification: [
+          "White ceramic knobs attached to joists",
+          "Ceramic tubes where wires pass through wood",
+          "Wires are separate, not bundled together",
+          "No outer sheathing on individual wires",
+        ],
+      },
+      {
+        title: "Aluminum",
+        description:
+          "Aluminum wiring was commonly used in homes built from 1960 to 1979. It looks similar to Romex but requires special connectors and installation methods.",
+        image: {
+          src: "/images/help/aluminum-wiring.webp",
+          alt: "Aluminum electrical cable with stamped markings identifying it as aluminum wiring",
+          fallbackSrc: ["/images/help/aluminum-wiring.jpg"],
+        },
+        characteristics: [
+          "Used in homes built 1960-1979",
+          "Requires special CO/ALR connectors",
+          "Higher failure rate at connections",
+          "May need professional inspection",
+        ],
+        identification: [
+          "Stamped with 'ALUMINUM', 'ALCAN', or 'AL/2'",
+          "Silver-colored wire ends",
+          "Similar appearance to Romex but labeled",
+        ],
+      },
+      {
+        title: "Other",
+        description:
+          "If your wiring does not match any of the common types described above, select \"Other\". This includes specialty wiring, old systems, or unique installations.",
+        characteristics: [
+          "Does not match standard categories",
+          "May be a specialty or regional type",
+          "May include older unclassified systems",
+        ],
+        identification: [
+          "Wiring that doesn't match Romex, BX, conduit, knob and tube, or aluminum",
+          "Unusual color, shape, or material",
+        ],
+      },
+    ],
+    tips: [
+      "Check exposed wiring in the basement, attic, garage, or behind the electrical panel cover.",
+      "If you cannot identify the wiring type, select \"Unknown\" — this is better than guessing incorrectly.",
+    ],
+  },
+  "knob-tube-wiring": {
+    title: "What is knob and tube wiring?",
+    description:
+      "Knob and tube wiring is an early electrical wiring method used in homes built from approximately 1900 to 1940. It consists of individual copper wires supported by white ceramic knobs and protected by ceramic tubes where passing through wood framing.",
+    image: {
+      src: "/images/help/knob-tube-wiring.webp",
+      alt: "Knob and tube wiring with ceramic knobs and tubes on wooden joists",
+      fallbackSrc: ["/images/help/knob-tube-wiring.jpg"],
+    },
+    tips: [
+      "Knob and tube wiring lacks a ground wire and may not be compatible with modern three-prong outlets.",
+      "It should be inspected by a licensed electrician, especially if you notice fraying, damage, or modifications.",
+      "Many insurance companies require inspection or replacement of knob and tube wiring.",
+    ],
+  },
+  "aluminum-wiring": {
+    title: "What is aluminum wiring?",
+    description:
+      "Aluminum wiring was used in residential construction from approximately 1960 to 1979. It appears similar to Romex but is marked with identifying text. Aluminum wiring requires special connectors and installation methods to reduce fire risk.",
+    image: {
+      src: "/images/help/aluminum-wiring.webp",
+      alt: "Aluminum wiring cable with stamped identification and silver-colored wire ends",
+      fallbackSrc: ["/images/help/aluminum-wiring.jpg"],
+    },
+    tips: [
+      "Look for markings on the cable sheath such as 'ALUMINUM', 'ALCAN', or 'AL/2'.",
+      "Aluminum wiring requires special CO/ALR rated outlets and switches.",
+      "Have aluminum wiring inspected by a licensed electrician if you have concerns.",
+      "Pigtailing with copper wire using approved connectors is a common remediation method.",
+    ],
+  },
+  "dwelling-type": {
+    title: "What is a dwelling type?",
+    description:
+      "A dwelling type describes how a home is occupied. The occupancy type affects insurance requirements, coverage options, and risk assessment. Select the option that best describes your current living situation.",
+    sections: [
+      {
+        title: "Owner Occupied",
+        description:
+          "Choose this option if the home is currently furnished or occupied, or if it will be furnished or occupied within 90 days of the policy issue date.",
+        characteristics: [
+          "Primary residence of the policyholder",
+          "Furnished and ready for occupancy",
+          "May be full-time or secondary/vacation home",
+        ],
+        identification: [
+          "You or a family member lives at this address",
+          "Personal belongings and furniture are present",
+          "Mail is received at this address",
+        ],
+      },
+      {
+        title: "Rental - Tenant Occupied",
+        description:
+          "Choose this option if the home is a rental property that is currently occupied by a tenant, or will be tenant-occupied within 90 days of the policy issue date.",
+        characteristics: [
+          "Property is leased to a tenant",
+          "Tenant pays rent to the property owner",
+          "May be standard or short-term rental",
+        ],
+        identification: [
+          "A lease or rental agreement is in place",
+          "Tenant's belongings are in the home",
+          "Utilities may be in the tenant's name",
+        ],
+      },
+      {
+        title: "Vacant",
+        description:
+          "Choose this option if the home is currently unfurnished or unoccupied, and will not be furnished or occupied within 90 days of the policy issue date.",
+        characteristics: [
+          "No one is living in the home",
+          "Furniture and personal belongings may be removed",
+          "Utilities may be disconnected",
+        ],
+        identification: [
+          "No personal belongings in the home",
+          "No active lease or occupancy agreement",
+          "Property is between tenants or owners",
+        ],
+      },
+    ],
+    tips: [
+      "If you are unsure, consider whether anyone is currently living at the property and whether furniture or personal belongings are present.",
+    ],
+  },
+  "plumbing-material": {
+    title: "What is plumbing material?",
+    description:
+      "Plumbing material refers to the type of pipe used for the water supply lines in your home. Different materials have different lifespans, maintenance requirements, and insurance considerations.",
+    sections: [
+      {
+        title: "Copper",
+        description:
+          "Copper piping is durable, corrosion-resistant, and has been the standard for residential plumbing for decades. It is typically found in homes built from the 1960s through the early 2000s.",
+        image: {
+          src: "/images/help/copper-pipe.webp",
+          alt: "Copper water pipe showing characteristic reddish-brown color and soldered joints",
+          fallbackSrc: ["/images/help/copper-pipe.jpg"],
+        },
+        characteristics: [
+          "Long lifespan (50+ years)",
+          "Resistant to corrosion",
+          "Can withstand high water pressure",
+          "Recyclable material",
+        ],
+        identification: [
+          "Reddish-brown metallic color",
+          "Soldered joints with visible silver-colored solder",
+          "Rigid pipes that hold their shape",
+        ],
+      },
+      {
+        title: "PEX",
+        description:
+          "PEX (cross-linked polyethylene) is a flexible plastic piping commonly used in modern construction and home renovations.",
+        image: {
+          src: "/images/help/pex-pipe.webp",
+          alt: "Flexible PEX pipe in red and blue indicating hot and cold water lines",
+          fallbackSrc: ["/images/help/pex-pipe.jpg"],
+        },
+        characteristics: [
+          "Flexible and easy to install",
+          "Resistant to freezing damage",
+          "Does not corrode",
+          "Color-coded (red for hot, blue for cold)",
+        ],
+        identification: [
+          "Flexible plastic tubing",
+          "Red, blue, or white color",
+          "Crimp or clamp ring connections at fittings",
+        ],
+      },
+      {
+        title: "PVC",
+        description:
+          "PVC (polyvinyl chloride) is a rigid white plastic pipe commonly used for drain, waste, and vent lines rather than supply lines.",
+        image: {
+          src: "/images/help/pvc-pipe.webp",
+          alt: "White PVC pipe with visible diameter markings and fittings",
+          fallbackSrc: ["/images/help/pvc-pipe.jpg"],
+        },
+        characteristics: [
+          "Lightweight and durable",
+          "Chemical resistant",
+          "Low cost",
+          "Primarily used for drainage",
+        ],
+        identification: [
+          "White or cream-colored rigid plastic",
+          "Diameter printed on the pipe",
+          "Glued joints with primer and cement",
+        ],
+      },
+      {
+        title: "Galvanized",
+        description:
+          "Galvanized steel pipes were commonly used in homes built before the 1960s and are prone to corrosion and mineral buildup over time.",
+        image: {
+          src: "/images/help/galvanized-pipe.webp",
+          alt: "Galvanized steel pipe showing gray metallic surface with threaded connections",
+          fallbackSrc: ["/images/help/galvanized-pipe.jpg"],
+        },
+        characteristics: [
+          "Prone to rust and corrosion over time",
+          "Mineral buildup can reduce water flow",
+          "Heavy and difficult to repair",
+          "Typical lifespan of 40-50 years",
+        ],
+        identification: [
+          "Gray metallic color",
+          "Threaded connections at joints",
+          "Magnetic (steel construction)",
+          "Often found in older homes",
+        ],
+      },
+      {
+        title: "Polybutylene",
+        description:
+          "Polybutylene was a gray or black flexible plastic pipe used from the 1970s to the 1990s. It is known for premature failure and is no longer approved for use.",
+        image: {
+          src: "/images/help/polybutylene-pipe.webp",
+          alt: "Gray polybutylene pipe with distinctive fittings and markings",
+          fallbackSrc: ["/images/help/polybutylene-pipe.jpg"],
+        },
+        characteristics: [
+          "Prone to cracking and leaking",
+          "Susceptible to chlorine degradation",
+          "No longer used in new construction",
+          "Often requires full replacement",
+        ],
+        identification: [
+          "Gray or black flexible plastic",
+          "Stamped with 'PB' or 'polybutylene'",
+          "Metal or plastic insert fittings",
+        ],
+      },
+    ],
+    tips: [
+      "Check exposed pipes in the basement, crawlspace, or under sinks. The material is usually visible where pipes enter the water heater or main shutoff valve.",
+    ],
+  },
+  "protective-devices": {
+    title: "What are protective devices?",
+    description:
+      "Protective devices refer to the electrical capacity and safety equipment installed in your home's electrical panel. The amperage rating indicates how much electrical load your home can safely handle.",
+    sections: [
+      {
+        title: "60 Amp Service",
+        description:
+          "60 amp service is typical for older homes or small apartments with limited electrical needs. It may be insufficient for modern appliances and electronics.",
+        characteristics: [
+          "Common in pre-1950 homes",
+          "Supports basic lighting and outlets",
+          "May not support modern HVAC or appliances",
+          "Often requires upgrade for additions",
+        ],
+        identification: [
+          "Main breaker or fuse block labeled '60'",
+          "Smaller panel size",
+          "Limited number of branch circuits",
+        ],
+      },
+      {
+        title: "100 Amp Service",
+        description:
+          "100 amp service is the minimum standard for most modern single-family homes and can support typical household appliances and lighting.",
+        characteristics: [
+          "Standard for most 20th century homes",
+          "Supports major appliances",
+          "Adequate for most households",
+          "May be tight for large homes with multiple AC units",
+        ],
+        identification: [
+          "Main breaker labeled '100'",
+          "Medium-sized panel box",
+          "12-20 branch circuits typical",
+        ],
+      },
+      {
+        title: "150 Amp Service",
+        description:
+          "150 amp service provides additional capacity for larger homes or those with higher electrical demands.",
+        characteristics: [
+          "Common in larger modern homes",
+          "Supports multiple major appliances",
+          "Accommodates central air conditioning",
+          "Room for future additions",
+        ],
+        identification: [
+          "Main breaker labeled '150'",
+          "Larger panel box",
+          "20-30 branch circuits typical",
+        ],
+      },
+      {
+        title: "200 Amp Service",
+        description:
+          "200 amp service is the current standard for new home construction and provides ample capacity for all typical household needs.",
+        characteristics: [
+          "Modern standard for new construction",
+          "Supports all major appliances and HVAC",
+          "Accommodates electric vehicle charging",
+          "Supports home additions and renovations",
+        ],
+        identification: [
+          "Main breaker labeled '200'",
+          "Large panel box",
+          "30-40 branch circuits typical",
+        ],
+      },
+      {
+        title: "200+ Amp Service",
+        description:
+          "200+ amp service (typically 400 amp) is used for very large homes, properties with multiple buildings, or homes with significant electrical demands.",
+        characteristics: [
+          "Used in large custom homes",
+          "Supports multiple HVAC systems",
+          "Accommodates workshops or outbuildings",
+          "Handles heavy electrical loads",
+        ],
+        identification: [
+          "Main breaker labeled '400' or higher",
+          "Extra-large panel or multiple panels",
+          "May have a separate meter",
+        ],
+      },
+    ],
+    tips: [
+      "Check the main breaker or fuse in your electrical panel. The amperage rating should be clearly printed on the main disconnect handle or label.",
+    ],
+  },
+  "roof-age": {
+    title: "What is roof age?",
+    description:
+      "Roof age refers to how long ago your roof was installed or last replaced. The age of your roof affects your insurance premium and coverage eligibility, as older roofs are more susceptible to damage.",
+    sections: [
+      {
+        title: "≤ 5 Years Ago",
+        description:
+          "A roof that is 5 years old or newer is considered new and in optimal condition. Most insurance companies offer the best rates for newer roofs.",
+        characteristics: [
+          "Full remaining useful life",
+          "Minimal maintenance issues expected",
+          "Best insurance rates available",
+          "Still under manufacturer warranty in many cases",
+        ],
+        identification: [
+          "Check your home purchase or renovation records",
+          "Look for permits issued for roof replacement",
+          "Contact the previous owner or builder",
+        ],
+      },
+      {
+        title: "5-10 Years",
+        description:
+          "A roof between 5 and 10 years old is still in good condition but has begun normal aging. Regular maintenance is recommended.",
+        characteristics: [
+          "Moderate wear from weather exposure",
+          "Minor maintenance may be needed",
+          "Most shingles still under warranty",
+          "Good insurance rates typically available",
+        ],
+        identification: [
+          "Review home improvement records",
+          "Check with the roofing contractor if known",
+          "Look for visible signs of aging like curling edges",
+        ],
+      },
+      {
+        title: "10-20 Years",
+        description:
+          "A roof between 10 and 20 years old is approaching the midpoint of its expected lifespan for asphalt shingles. Insurance rates may increase.",
+        characteristics: [
+          "Significant wear from weather exposure",
+          "Higher risk of leaks and damage",
+          "May require repairs before insurance renewal",
+          "Some insurers may require inspection",
+        ],
+        identification: [
+          "Visible granule loss in gutters",
+          "Curling or missing shingles",
+          "Check original roof installation documents",
+        ],
+      },
+      {
+        title: "20+ Years",
+        description:
+          "A roof that is more than 20 years old is beyond the typical lifespan for asphalt shingles and may be difficult to insure without inspection.",
+        characteristics: [
+          "Beyond standard shingle lifespan",
+          "High risk of leaks and structural damage",
+          "Insurance may require inspection or replacement",
+          "Limited coverage options available",
+        ],
+        identification: [
+          "Multiple layers of shingles visible",
+          "Sagging or uneven roofline",
+          "Frequent leaks or water stains on ceilings",
+        ],
+      },
+    ],
+    tips: [
+      "If you are unsure of your roof age, check your home purchase documents, ask the previous owner, or contact a local roofing company for an assessment.",
+    ],
+  },
+  "foundation-type": {
+    title: "What is foundation type?",
+    description:
+      "Foundation type describes the structure beneath your home. The type of foundation affects the home's stability, moisture protection, and insurance considerations.",
+    sections: [
+      {
+        title: "Finished Basement",
+        description:
+          "A finished basement has been remodeled into livable space with walls, flooring, and often includes additional rooms, bathrooms, or entertainment areas.",
+        characteristics: [
+          "Living space below the main floor",
+          "Insulated and finished walls",
+          "Heated and cooled area",
+          "May include bedrooms or bathrooms",
+        ],
+        identification: [
+          "Drywall or paneling on basement walls",
+          "Finished flooring (carpet, tile, laminate)",
+          "Ceiling may be finished or drop ceiling",
+          "Furniture and personal belongings present",
+        ],
+      },
+      {
+        title: "Unfinished Basement",
+        description:
+          "An unfinished basement has not been remodeled and typically has exposed concrete walls, flooring, and open ceiling joists. It is commonly used for storage, utilities, and mechanical systems.",
+        characteristics: [
+          "Exposed concrete or block walls",
+          "Concrete floor",
+          "Open ceiling with exposed joists",
+          "Houses mechanical equipment",
+        ],
+        identification: [
+          "No drywall or finished walls",
+          "Exposed insulation between joists",
+          "Utility areas and storage",
+          "Concrete floor without finished flooring",
+        ],
+      },
+      {
+        title: "No Basement",
+        description:
+          "A home with no basement may be built on a crawlspace or concrete slab. These homes have no below-grade living or storage area.",
+        characteristics: [
+          "No underground level",
+          "May have crawlspace access",
+          "Slab-on-grade construction",
+          "Mechanical systems on main level or in attic",
+        ],
+        identification: [
+          "No stairway leading down",
+          "All rooms on ground level or above",
+          "Exterior access to crawlspace if present",
+        ],
+      },
+    ],
+    tips: [
+      "If you have a basement, check whether the walls are finished with drywall or remain as exposed concrete or block. This determines whether it is finished or unfinished.",
+    ],
+  },
+  "swimming-pool-enclosure": {
+    title: "What is a swimming pool enclosure?",
+    description:
+      "A swimming pool enclosure is a safety barrier designed to prevent unsupervised access to the pool area. Proper enclosures are critical for safety and are often required by local building codes and insurance policies.",
+    image: {
+      src: "/images/help/pool-enclosure.webp",
+      alt: "Swimming pool with a safety fence and self-closing gate around the perimeter",
+      fallbackSrc: ["/images/help/pool-enclosure.jpg"],
+    },
+    tips: [
+      "Pool enclosures should be at least 4 feet tall with no gaps larger than 4 inches.",
+      "Gates must be self-closing and self-latching.",
+      "Enclosures should not have any footholds or handholds that could help a child climb over.",
+      "Check local building codes for specific requirements in your area.",
+    ],
+  },
+  "pool-safety-enclosure": {
+    title: "What is a pool safety enclosure?",
+    description:
+      "A pool safety enclosure is a fence, wall, or barrier that surrounds your swimming pool to prevent unauthorized access. Insurance companies require safety enclosures to reduce the risk of accidents and liability.",
+    image: {
+      src: "/images/help/pool-safety-fence.webp",
+      alt: "Pool safety fence with a self-closing gate and latch mechanism clearly visible",
+      fallbackSrc: ["/images/help/pool-safety-fence.jpg"],
+    },
+    tips: [
+      "The enclosure must completely surround the pool area.",
+      "Gates must open outward and close automatically.",
+      "Latches should be above the reach of small children.",
+      "Regularly inspect the fence for gaps, damage, or wear.",
+    ],
+  },
+  "wood-burning-fireplace": {
+    title: "What is a wood-burning fireplace?",
+    description:
+      "A wood-burning fireplace is a traditional heating feature that burns wood logs for heat and ambiance. Wood-burning fireplaces require regular maintenance and inspection to ensure safe operation.",
+    image: {
+      src: "/images/help/wood-fireplace.webp",
+      alt: "Wood-burning fireplace with brick hearth, firebox, and chimney visible",
+      fallbackSrc: ["/images/help/wood-fireplace.jpg"],
+    },
+    tips: [
+      "Have your chimney inspected and cleaned annually by a certified professional.",
+      "Use only seasoned, dry wood to reduce creosote buildup.",
+      "Install a chimney cap to prevent animals and debris from entering.",
+      "Keep a fire extinguisher nearby and install carbon monoxide detectors.",
+    ],
   },
 };
 

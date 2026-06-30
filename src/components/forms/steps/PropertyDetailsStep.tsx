@@ -1,21 +1,24 @@
 import { StepCard } from "@/components/forms/StepCard";
 import { FieldLabel } from "@/components/forms/FieldLabel";
 import { RadioRow } from "@/components/forms/RadioRow";
+import { HelpLink } from "@/components/forms/HelpLink";
 import { YearPicker } from "@/components/forms/YearPicker";
 import { NavFooter } from "@/components/forms/NavFooter";
 import { FileDropZone } from "@/components/forms/FileDropZone";
 import { SectionHeader } from "@/components/forms/SectionHeader";
 import { SURVEY_SECTIONS } from "@/config/survey";
-import type { SurveyData, SurveyUpdater } from "@/types/survey";
+import { openHelp } from "@/components/forms/help-utils";
+import type { SurveyData, SurveyUpdater, HelpContent } from "@/types/survey";
 
 interface PropertyDetailsStepProps {
   data: SurveyData;
   update: SurveyUpdater;
   onNext: () => void;
   onBack: () => void;
+  onHelp?: (p: HelpContent) => void;
 }
 
-export function PropertyDetailsStep({ data, update, onNext, onBack }: PropertyDetailsStepProps) {
+export function PropertyDetailsStep({ data, update, onNext, onBack, onHelp }: PropertyDetailsStepProps) {
   return (
     <div className="max-w-3xl mx-auto">
       <div>
@@ -49,6 +52,11 @@ export function PropertyDetailsStep({ data, update, onNext, onBack }: PropertyDe
               />
             ))}
           </div>
+          {onHelp && (
+            <div className="mt-1.5">
+              <HelpLink label="How does roof age affect my policy?" onClick={() => openHelp("roof-age", onHelp)} />
+            </div>
+          )}
         </div>
 
         <div className="mb-6">
@@ -79,6 +87,11 @@ export function PropertyDetailsStep({ data, update, onNext, onBack }: PropertyDe
               onClick={() => update("basement", "no")}
             />
           </div>
+          {onHelp && (
+            <div className="mt-1.5">
+              <HelpLink label="What is foundation type?" onClick={() => openHelp("foundation-type", onHelp)} />
+            </div>
+          )}
         </div>
 
         {data.basement && data.basement !== "no" && (
