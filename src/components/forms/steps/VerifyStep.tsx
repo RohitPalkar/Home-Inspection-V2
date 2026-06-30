@@ -1,3 +1,6 @@
+import { ClipboardCheck } from "lucide-react";
+import { SectionHeader } from "@/components/forms/SectionHeader";
+import { SURVEY_SECTIONS } from "@/config/survey";
 import type { SurveyData, SurveyUpdater } from "@/types/survey";
 
 interface VerifyStepProps {
@@ -21,12 +24,12 @@ const FIELDS: [string, keyof SurveyData][] = [
 export function VerifyStep({ data, update, onNext, onBack }: VerifyStepProps) {
   return (
     <div className="max-w-2xl mx-auto">
-      <h2 className="text-2xl sm:text-3xl font-bold text-foreground text-center">
-        Verify your property information
-      </h2>
-      <p className="mt-2 text-muted-foreground text-center">
-        Please confirm that this information is correct before proceeding.
-      </p>
+      <div className="flex items-center gap-3 mb-6">
+        <div className="w-10 h-10 rounded-lg bg-accent grid place-items-center">
+          <ClipboardCheck className="w-5 h-5 text-primary" />
+        </div>
+        <SectionHeader section={SURVEY_SECTIONS.verify} className="mb-0" />
+      </div>
 
       {!data.editMode ? (
         <>

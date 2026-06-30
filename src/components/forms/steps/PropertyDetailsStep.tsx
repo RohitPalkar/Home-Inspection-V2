@@ -1,10 +1,12 @@
-import { Home } from "lucide-react";
+import { Timer } from "lucide-react";
 import { StepCard } from "@/components/forms/StepCard";
 import { FieldLabel } from "@/components/forms/FieldLabel";
 import { RadioRow } from "@/components/forms/RadioRow";
 import { YearPicker } from "@/components/forms/YearPicker";
 import { NavFooter } from "@/components/forms/NavFooter";
 import { FileDropZone } from "@/components/forms/FileDropZone";
+import { SectionHeader } from "@/components/forms/SectionHeader";
+import { SURVEY_SECTIONS } from "@/config/survey";
 import type { SurveyData, SurveyUpdater } from "@/types/survey";
 
 interface PropertyDetailsStepProps {
@@ -29,14 +31,9 @@ export function PropertyDetailsStep({ data, update, onNext, onBack }: PropertyDe
       <StepCard className="mt-6 p-6 sm:p-8 ring-2 ring-primary/30">
         <div className="flex items-center gap-3 mb-6">
           <div className="w-10 h-10 rounded-lg bg-accent grid place-items-center">
-            <Home className="w-5 h-5 text-primary" />
+            <Timer className="w-5 h-5 text-primary" />
           </div>
-          <div>
-            <div className="font-bold text-foreground">Property Details</div>
-            <div className="text-xs text-muted-foreground">
-              Let's start with some basic information about your home.
-            </div>
-          </div>
+          <SectionHeader section={SURVEY_SECTIONS["property-details"]} className="mb-0" />
         </div>
 
         <div className="mb-6">

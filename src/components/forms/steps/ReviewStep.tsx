@@ -1,8 +1,10 @@
 import { useState, useCallback } from "react";
-import { Edit3 } from "lucide-react";
+import { Edit3, FileCheck } from "lucide-react";
 import { StepCard } from "@/components/forms/StepCard";
 import { PrimaryButton } from "@/components/forms/PrimaryButton";
 import { OutlineButton } from "@/components/forms/OutlineButton";
+import { SectionHeader } from "@/components/forms/SectionHeader";
+import { SURVEY_SECTIONS } from "@/config/survey";
 import type { SurveyData, StepKey } from "@/types/survey";
 
 interface ReviewStepProps {
@@ -72,8 +74,12 @@ export function ReviewStep({ data, onSubmit, onBack, onEdit }: ReviewStepProps) 
 
   return (
     <div className="max-w-3xl mx-auto">
-      <h2 className="text-2xl sm:text-3xl font-bold text-foreground">Review & Submit</h2>
-      <p className="mt-2 text-muted-foreground">Please review all answers before submitting.</p>
+      <div className="flex items-center gap-3 mb-6">
+        <div className="w-10 h-10 rounded-lg bg-accent grid place-items-center">
+          <FileCheck className="w-5 h-5 text-primary" />
+        </div>
+        <SectionHeader section={SURVEY_SECTIONS.review} className="mb-0" />
+      </div>
 
       <div className="mt-6 space-y-4">
         {sections.map((s) => (

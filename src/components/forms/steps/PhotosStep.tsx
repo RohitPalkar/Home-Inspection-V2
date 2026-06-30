@@ -1,8 +1,10 @@
-import { Lightbulb } from "lucide-react";
+import { Camera, Lightbulb } from "lucide-react";
 import { StepCard } from "@/components/forms/StepCard";
 import { FieldLabel } from "@/components/forms/FieldLabel";
 import { NavFooter } from "@/components/forms/NavFooter";
 import { FileDropZone } from "@/components/forms/FileDropZone";
+import { SectionHeader } from "@/components/forms/SectionHeader";
+import { SURVEY_SECTIONS } from "@/config/survey";
 import type { SurveyData, SurveyUpdater } from "@/types/survey";
 
 interface PhotosStepProps {
@@ -39,10 +41,12 @@ export function PhotosStep({ data, update, onNext, onBack }: PhotosStepProps) {
       </div>
 
       <StepCard className="p-6 sm:p-8">
-        <h2 className="text-xl sm:text-2xl font-bold text-foreground">Photo Upload Checklist</h2>
-        <p className="text-sm text-muted-foreground mt-1">
-          Based on your responses, please upload photos for each item below.
-        </p>
+        <div className="flex items-center gap-3 mb-6">
+          <div className="w-10 h-10 rounded-lg bg-accent grid place-items-center">
+            <Camera className="w-5 h-5 text-primary" />
+          </div>
+          <SectionHeader section={SURVEY_SECTIONS.photos} className="mb-0" />
+        </div>
 
         <div className="mt-6 space-y-6">
           {required.map((r) => (

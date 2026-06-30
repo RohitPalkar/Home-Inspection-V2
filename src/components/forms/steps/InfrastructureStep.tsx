@@ -4,6 +4,8 @@ import { FieldLabel } from "@/components/forms/FieldLabel";
 import { YearPicker } from "@/components/forms/YearPicker";
 import { Select } from "@/components/forms/Select";
 import { NavFooter } from "@/components/forms/NavFooter";
+import { SectionHeader } from "@/components/forms/SectionHeader";
+import { SURVEY_SECTIONS } from "@/config/survey";
 import type { SurveyData, SurveyUpdater } from "@/types/survey";
 
 interface InfrastructureStepProps {
@@ -20,17 +22,12 @@ export function InfrastructureStep({ data, update, onNext, onBack }: Infrastruct
   return (
     <div className="max-w-2xl mx-auto">
       <StepCard className="p-6 sm:p-8">
-        <div className="flex items-center gap-3 mb-2">
+        <div className="flex items-center gap-3 mb-4">
           <div className="w-10 h-10 rounded-lg bg-accent grid place-items-center">
             <Home className="w-5 h-5 text-primary" />
           </div>
-          <h2 className="text-xl sm:text-2xl font-bold text-foreground">
-            Core Building Infrastructure & Systems
-          </h2>
+          <SectionHeader section={SURVEY_SECTIONS.infrastructure} className="mb-0" />
         </div>
-        <p className="text-sm text-muted-foreground">
-          Verify and update your primary infrastructure attributes.
-        </p>
 
         <div className="mt-6 space-y-5">
           <div>
