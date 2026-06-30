@@ -5,14 +5,19 @@ export interface SectionConfig {
   subtitle?: string;
 }
 
+export interface PhotoRequirement {
+  key: string;
+  label: string;
+  guidanceKey: string;
+}
+
 export const HEATING_QUESTION: RadioQuestionConfig = {
   id: "heatingFuel",
   label: "Heating Fuel Type",
   required: true,
-  questionHelp: {
-    label: "What is a heating system?",
-    entryKey: "heating-system",
-  },
+  helpLinks: [
+    { label: "What is a heating system?", entryKey: "heating-system" },
+  ],
   options: [
     {
       label: "Gas",
@@ -25,10 +30,9 @@ export const HEATING_QUESTION: RadioQuestionConfig = {
         id: "gasMeterPresent",
         label: "Gas Meter Present?",
         required: true,
-        questionHelp: {
-          label: "What is a gas meter?",
-          entryKey: "gas-meter",
-        },
+        helpLinks: [
+          { label: "What is a gas meter?", entryKey: "gas-meter" },
+        ],
         options: [
           { label: "Yes", value: "true" },
           { label: "No", value: "false" },
@@ -46,10 +50,9 @@ export const HEATING_QUESTION: RadioQuestionConfig = {
         id: "baseboardHeating",
         label: "Does the home use electric baseboard heating?",
         required: true,
-        questionHelp: {
-          label: "What is electric baseboard heating?",
-          entryKey: "electric-baseboard",
-        },
+        helpLinks: [
+          { label: "What is electric baseboard heating?", entryKey: "electric-baseboard" },
+        ],
         options: [
           { label: "Yes", value: "true" },
           { label: "No", value: "false" },
@@ -67,10 +70,9 @@ export const HEATING_QUESTION: RadioQuestionConfig = {
         id: "oilTankUnderground",
         label: "Is the oil tank underground?",
         required: true,
-        questionHelp: {
-          label: "What is an underground oil tank?",
-          entryKey: "underground-oil-tank",
-        },
+        helpLinks: [
+          { label: "What is an underground oil tank?", entryKey: "underground-oil-tank" },
+        ],
         options: [
           { label: "Yes", value: "true" },
           { label: "No", value: "false" },
@@ -88,16 +90,47 @@ export const HEATING_QUESTION: RadioQuestionConfig = {
         id: "propaneTankLocation",
         label: "Where is the propane tank located?",
         required: true,
-        questionHelp: {
-          label: "Where is a propane tank located?",
-          entryKey: "propane-tank-location",
-        },
+        helpLinks: [
+          { label: "Where is a propane tank located?", entryKey: "propane-tank-location" },
+        ],
         options: [
           { label: "Above Ground", value: "above-ground" },
           { label: "Underground", value: "underground" },
         ],
       },
     },
+  ],
+};
+
+export const PHOTO_REQUIREMENTS: PhotoRequirement[] = [
+  { key: "exterior-front", label: "Front Exterior Photo", guidanceKey: "front-exterior" },
+  { key: "exterior-rear", label: "Rear Exterior Photo", guidanceKey: "rear-exterior" },
+  { key: "exterior-left", label: "Left Side Exterior Photo", guidanceKey: "left-exterior" },
+  { key: "exterior-right", label: "Right Side Exterior Photo", guidanceKey: "right-exterior" },
+  { key: "roof", label: "Roof Overview Photo", guidanceKey: "roof-overview" },
+  { key: "electrical-panel", label: "Electrical Panel Photo", guidanceKey: "electrical-panel" },
+  { key: "hvac", label: "HVAC System Photo", guidanceKey: "hvac-system" },
+  { key: "water-heater", label: "Water Heater Photo", guidanceKey: "water-heater" },
+  { key: "kitchen", label: "Kitchen Photo", guidanceKey: "kitchen" },
+  { key: "bathroom", label: "Bathroom Photo", guidanceKey: "bathroom" },
+];
+
+export const CONDITIONAL_PHOTO_REQUIREMENTS: Record<string, PhotoRequirement[]> = {
+  pool: [
+    { key: "pool", label: "Swimming Pool Photo", guidanceKey: "swimming-pool" },
+    { key: "pool-fence", label: "Pool Fence Photo", guidanceKey: "pool-fence" },
+  ],
+  fireplace: [
+    { key: "fireplace", label: "Fireplace / Hearth Photo", guidanceKey: "fireplace" },
+  ],
+  solar: [
+    { key: "solar", label: "Solar Panels Photo", guidanceKey: "solar-panels" },
+  ],
+  garage: [
+    { key: "garage", label: "Detached Garage Photo", guidanceKey: "detached-garage" },
+  ],
+  structures: [
+    { key: "other-structures", label: "Other Structures Photo", guidanceKey: "other-structures" },
   ],
 };
 

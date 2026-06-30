@@ -1,34 +1,47 @@
 import { Lightbulb } from "lucide-react";
 import { StepCard } from "@/components/forms/StepCard";
 import { FieldLabel } from "@/components/forms/FieldLabel";
+import { HelpLink } from "@/components/forms/HelpLink";
 import { NavFooter } from "@/components/forms/NavFooter";
 import { FileDropZone } from "@/components/forms/FileDropZone";
 import { SectionHeader } from "@/components/forms/SectionHeader";
-import { SURVEY_SECTIONS } from "@/config/survey";
-import type { SurveyData, SurveyUpdater } from "@/types/survey";
+import { PhotoGuidanceDialog } from "@/components/forms/PhotoGuidanceDialog";
+import { SURVEY_SECTIONS, PHOTO_REQUIREMENTS, CONDITIONAL_PHOTO_REQUIREMENTS } from "@/config/survey";
+import { PHOTO_GUIDANCE } from "@/config/help";
+import type { SurveyData, SurveyUpdater, HelpContent } from "@/types/survey";
+import type { PhotoRequirement } from "@/config/survey";
 
 interface PhotosStepProps {
   data: SurveyData;
   update: SurveyUpdater;
   onNext: () => void;
   onBack: () => void;
+  onHelp?: (c: HelpContent) => void;
 }
 
-export function PhotosStep({ data, update, onNext, onBack }: PhotosStepProps) {
-  const required: { key: string; label: string }[] = [
-    { key: "exterior", label: "Exterior — All four sides of the home" },
-    { key: "roof", label: "Roof Overview Photo" },
-  ];
-  if (data.businessTypes.some((b) => b !== "None"))
-    required.push({ key: "business", label: "Business Spaces Photo" });
-  if (data.hasPool === "yes")
-    required.push({ key: "pool", label: "Swimming Pool Safety & Enclosure Photo" });
-  required.push({ key: "fireplace", label: "Fireplace / Hearth Venting System Photo" });
-  required.push({ key: "outbuilding", label: "Detached Outbuildings Photo Check" });
-
+export function PhotosStep({ data, update, onNext, onBack, onHelp }: PhotosStepProps) {
   const setUploads = (key: string, files: File[]) => {
     update("uploads", { ...data.uploads, [key]: files });
   };
+
+  const openGuidance = (guidanceKey: string) => {
+    const entry = PHOTO_GUIDANCE[guidanceKey];
+    if (!entry || !onHelp) return;
+    onHelp({
+      title: entry.title,
+      body: <PhotoGuidanceDialog entry={entry} />,
+    });
+  };
+
+  const requirements: PhotoRequirement[] = [
+    ...PHOTO_REQUIREMENTS,
+    ...CONDITIONAL_PHOTO_REQUIREMENTS.fireplace,
+    ...CONDITIONAL_PHOTO_REQUIREMENTS.garage,
+    ...CONDITIONAL_PHOTO_REQUIREMENTS.structures,
+  ];
+  if (data.hasPool === "yes") {
+    requirements.push(...CONDITIONAL_PHOTO_REQUIREMENTS.pool);
+  }
 
   return (
     <div className="max-w-3xl mx-auto">
@@ -44,13 +57,21 @@ export function PhotosStep({ data, update, onNext, onBack }: PhotosStepProps) {
         <SectionHeader section={SURVEY_SECTIONS.photos} />
 
         <div className="mt-6 space-y-6">
-          {required.map((r) => (
+          {requirements.map((r) => (
             <div key={r.key}>
               <FieldLabel required>{r.label}</FieldLabel>
               <FileDropZone
                 files={data.uploads[r.key] ?? []}
                 onChange={(files) => setUploads(r.key, files)}
               />
+              {onHelp && (
+                <div className="mt-1.5">
+                  <HelpLink
+                    label="How should I take this photo?"
+                    onClick={() => openGuidance(r.guidanceKey)}
+                  />
+                </div>
+              )}
             </div>
           ))}
         </div>

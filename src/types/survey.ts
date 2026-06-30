@@ -72,7 +72,7 @@ export interface ConditionalQuestionConfig {
   id: keyof SurveyData;
   label: string;
   required?: boolean;
-  questionHelp?: HelpLinkDef;
+  helpLinks?: HelpLinkDef[];
   options: { label: string; value: string }[];
 }
 
@@ -80,11 +80,28 @@ export interface RadioQuestionConfig {
   id: keyof SurveyData;
   label: string;
   required?: boolean;
-  questionHelp?: HelpLinkDef;
+  helpLinks?: HelpLinkDef[];
   options: {
     label: string;
     value: string;
     optionHelp?: HelpLinkDef;
     showQuestion?: ConditionalQuestionConfig;
   }[];
+}
+
+export interface PhotoGuidanceImage {
+  src: string;
+  alt: string;
+  caption: string;
+  fallbackSrc?: string[];
+}
+
+export interface PhotoGuidanceEntry {
+  title: string;
+  purpose: string;
+  steps: string[];
+  goodExample: PhotoGuidanceImage;
+  badExample: PhotoGuidanceImage;
+  tips: string[];
+  commonMistakes: string[];
 }

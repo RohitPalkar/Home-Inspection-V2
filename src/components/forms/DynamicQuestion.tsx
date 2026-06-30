@@ -8,6 +8,7 @@ import type {
   HelpContent,
   RadioQuestionConfig,
   ConditionalQuestionConfig,
+  HelpLinkDef,
 } from "@/types/survey";
 
 interface DynamicQuestionProps {
@@ -22,7 +23,46 @@ function toHelpContent(entryKey: string): HelpContent {
   if (!entry) {
     return { title: entryKey, body: <p>Help content not found.</p> };
   }
-  return { title: entry.title, body: <p className="text-muted-foreground">{entry.description}</p> };
+  return {
+    title: entry.title,
+    body: (
+      <div className="space-y-4">
+        <p className="text-muted-foreground">{entry.description}</p>
+        {entry.tips && entry.tips.length > 0 && (
+          <ul className="space-y-1">
+            {entry.tips.map((t, i) => (
+              <li key={i} className="text-sm text-muted-foreground flex gap-2">
+                <span className="text-primary shrink-0">•</span>
+                <span>{t}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    ),
+  };
+}
+
+function HelpLinksGroup({
+  links,
+  onHelp,
+}: {
+  links: HelpLinkDef[];
+  onHelp: (c: HelpContent) => void;
+}) {
+  if (!links || links.length === 0) return null;
+  return (
+    <div className="space-y-1">
+      {links.map((link) => (
+        <div key={link.entryKey} className="flex justify-center">
+          <HelpLink
+            label={link.label}
+            onClick={() => onHelp(toHelpContent(link.entryKey))}
+          />
+        </div>
+      ))}
+    </div>
+  );
 }
 
 function OptionHelpLink({
@@ -66,18 +106,7 @@ function ConditionalQuestion({
 
   return (
     <div className="border-t border-border pt-4 mt-4">
-      <div className="flex items-center gap-2 mb-1.5">
-        <FieldLabel required={question.required}>{question.label}</FieldLabel>
-        {question.questionHelp && (
-          <button
-            type="button"
-            className="inline-flex items-center gap-1 text-primary text-sm font-medium hover:underline"
-            onClick={() => onHelp(toHelpContent(question.questionHelp!.entryKey))}
-          >
-            ⓘ
-          </button>
-        )}
-      </div>
+      <FieldLabel required={question.required}>{question.label}</FieldLabel>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
         {question.options.map((opt) => (
           <RadioRow
@@ -88,6 +117,11 @@ function ConditionalQuestion({
           />
         ))}
       </div>
+      {question.helpLinks && question.helpLinks.length > 0 && (
+        <div className="mt-2 space-y-1">
+          <HelpLinksGroup links={question.helpLinks} onHelp={onHelp} />
+        </div>
+      )}
     </div>
   );
 }
@@ -97,18 +131,7 @@ export function DynamicQuestion({ config, data, update, onHelp }: DynamicQuestio
 
   return (
     <div>
-      <div className="flex items-center gap-2 mb-1.5">
-        <FieldLabel required={config.required}>{config.label}</FieldLabel>
-        {config.questionHelp && (
-          <button
-            type="button"
-            className="inline-flex items-center gap-1 text-primary text-sm font-medium hover:underline"
-            onClick={() => onHelp(toHelpContent(config.questionHelp!.entryKey))}
-          >
-            ⓘ
-          </button>
-        )}
-      </div>
+      <FieldLabel required={config.required}>{config.label}</FieldLabel>
       <div className="space-y-2">
         {config.options.map((opt) => (
           <RadioRow
@@ -120,6 +143,9 @@ export function DynamicQuestion({ config, data, update, onHelp }: DynamicQuestio
         ))}
       </div>
       <div className="mt-3 space-y-1">
+        {config.helpLinks && config.helpLinks.length > 0 && (
+          <HelpLinksGroup links={config.helpLinks} onHelp={onHelp} />
+        )}
         <OptionHelpLink selectedOption={value} config={config} onHelp={onHelp} />
       </div>
       {value &&
