@@ -1,7 +1,7 @@
 import { StepCard } from "@/components/forms/StepCard";
 import { FieldLabel } from "@/components/forms/FieldLabel";
 import { YearPicker } from "@/components/forms/YearPicker";
-import { Select } from "@/components/forms/Select";
+import { Dropdown } from "@/components/forms/Dropdown";
 import { HelpLink } from "@/components/forms/HelpLink";
 import { NavFooter } from "@/components/forms/NavFooter";
 import { SectionHeader } from "@/components/forms/SectionHeader";
@@ -53,14 +53,18 @@ export function InfrastructureStep({ data, update, onNext, onBack, onHelp }: Inf
 
           <div>
             <FieldLabel>Amperage & Panel Capacity</FieldLabel>
-            <Select value={data.amperage} onChange={(e) => update("amperage", e.target.value)}>
-              <option value="">Select capacity…</option>
-              <option value="60">60 amp</option>
-              <option value="100">100 amp</option>
-              <option value="150">150 amp</option>
-              <option value="200">200 amp</option>
-              <option value="200+">200+ amp</option>
-            </Select>
+            <Dropdown
+              value={data.amperage}
+              onChange={(v) => update("amperage", v)}
+              placeholder="Select capacity…"
+              options={[
+                { label: "60 amp", value: "60" },
+                { label: "100 amp", value: "100" },
+                { label: "150 amp", value: "150" },
+                { label: "200 amp", value: "200" },
+                { label: "200+ amp", value: "200+" },
+              ]}
+            />
             {onHelp && (
               <div className="mt-1.5">
                 <HelpLink label="What are protective devices?" onClick={() => openHelp("protective-devices", onHelp)} />
@@ -70,17 +74,18 @@ export function InfrastructureStep({ data, update, onNext, onBack, onHelp }: Inf
 
           <div>
             <FieldLabel>Plumbing Material</FieldLabel>
-            <Select
+            <Dropdown
               value={data.plumbingMaterial}
-              onChange={(e) => update("plumbingMaterial", e.target.value)}
-            >
-              <option value="">Select material…</option>
-              <option>Copper</option>
-              <option>PEX</option>
-              <option>PVC</option>
-              <option>Galvanized</option>
-              <option>Polybutylene</option>
-            </Select>
+              onChange={(v) => update("plumbingMaterial", v)}
+              placeholder="Select material…"
+              options={[
+                { label: "Copper", value: "Copper" },
+                { label: "PEX", value: "PEX" },
+                { label: "PVC", value: "PVC" },
+                { label: "Galvanized", value: "Galvanized" },
+                { label: "Polybutylene", value: "Polybutylene" },
+              ]}
+            />
             {onHelp && (
               <div className="mt-1.5">
                 <HelpLink label="What is plumbing material?" onClick={() => openHelp("plumbing-material", onHelp)} />

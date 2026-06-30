@@ -1,10 +1,10 @@
-export function Select({ children, ...props }: React.SelectHTMLAttributes<HTMLSelectElement>) {
-  return (
-    <select
-      {...props}
-      className={`w-full min-h-[44px] px-3 rounded-lg border border-input bg-card text-foreground focus:outline-none focus:ring-2 focus:ring-ring ${props.className ?? ""}`}
-    >
-      {children}
-    </select>
-  );
-}
+/**
+ * @deprecated Use Dropdown from "@/components/forms/Dropdown" instead.
+ *
+ * This component was previously a wrapper around the native `<select>` element.
+ * It has been replaced by the custom Dropdown component which provides a consistent
+ * cross-browser appearance with full keyboard accessibility and WCAG 2.2 AA compliance.
+ */
+export { Dropdown as Select } from "./Dropdown";
+export type { DropdownOption as SelectOption } from "./Dropdown";
+
