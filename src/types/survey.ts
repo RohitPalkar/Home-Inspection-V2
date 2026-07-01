@@ -97,7 +97,7 @@ export interface PhotoGuidanceImage {
 }
 
 export interface PhotoGuidanceEntry {
-  category: "exterior" | "interior";
+  category: "exterior" | "interior" | "systems";
   title: string;
   purpose: string;
   steps: string[];

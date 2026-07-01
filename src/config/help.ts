@@ -53,9 +53,9 @@ export const HELP: Record<string, HelpEntry> = {
         description:
           "Natural gas heating systems burn natural gas to generate heat and are one of the most common heating methods in residential homes.",
         image: {
-          src: "/images/help/gas-furnace.webp",
+          src: "/images/help/heating/heating-gas.webp",
           alt: "Gas furnace showing burner assembly and gas supply line connections",
-          fallbackSrc: ["/images/help/gas-furnace.jpg"],
+          fallbackSrc: ["/images/help/heating/heating-gas.jpg"],
         },
         characteristics: [
           "Connected to a natural gas line",
@@ -74,9 +74,9 @@ export const HELP: Record<string, HelpEntry> = {
         description:
           "Electric heating systems use electricity to generate heat and may include electric furnaces, baseboard heaters, or heat pumps.",
         image: {
-          src: "/images/help/electric-heater.webp",
+          src: "/images/help/heating/heating-electric.webp",
           alt: "Electric baseboard heater installed along a wall with visible wiring connections",
-          fallbackSrc: ["/images/help/electric-heater.jpg"],
+          fallbackSrc: ["/images/help/heating/heating-electric.jpeg"],
         },
         characteristics: [
           "No combustion fuel required",
@@ -96,9 +96,9 @@ export const HELP: Record<string, HelpEntry> = {
         description:
           "Oil heating systems burn heating oil stored in a fuel tank to provide heat throughout the home.",
         image: {
-          src: "/images/help/oil-furnace.webp",
+          src: "/images/help/heating/heating-oil.webp",
           alt: "Oil furnace with fuel line connected to an oil storage tank",
-          fallbackSrc: ["/images/help/oil-furnace.jpg"],
+          fallbackSrc: ["/images/help/heating/heating-oil.jpeg"],
         },
         characteristics: [
           "Fuel stored in an indoor or outdoor tank",
@@ -118,9 +118,9 @@ export const HELP: Record<string, HelpEntry> = {
         description:
           "Propane heating systems use propane gas stored in an above-ground or underground storage tank.",
         image: {
-          src: "/images/help/propane-tank.webp",
+          src: "/images/help/heating/heating-propane.webp",
           alt: "White propane storage tank located outdoors with regulator and supply line",
-          fallbackSrc: ["/images/help/propane-tank.jpg"],
+          fallbackSrc: ["/images/help/heating/heating-propane.jpg"],
         },
         characteristics: [
           "Common in rural areas",
@@ -149,9 +149,9 @@ export const HELP: Record<string, HelpEntry> = {
     description:
       "A gas meter measures the volume of natural gas supplied to your property. It is typically located on the exterior of the home or in a utility area and is used by the gas company to track consumption.",
     image: {
-      src: "/images/gas-meter.webp",
+      src: "/images/help/heating/gas-meter.webp",
       alt: "Example of a gas meter",
-      fallbackSrc: ["/images/gas-meter.jpg", "/images/gas-meter.jpeg"],
+      fallbackSrc: ["/images/help/heating/gas-meter.jpeg"],
     },
   },
   "oil-heating": {
@@ -164,9 +164,9 @@ export const HELP: Record<string, HelpEntry> = {
     description:
       "An underground oil tank is a storage tank buried below ground level that holds heating oil. These tanks require specialized inspection since leaks can cause environmental contamination and property damage.",
     image: {
-      src: "/images/underground-oil-tank.webp",
+      src: "/images/help/heating/underground-oil-tank.webp",
       alt: "Underground oil tank diagram",
-      fallbackSrc: ["/images/underground-oil-tank.jpg"],
+      fallbackSrc: ["/images/help/heating/underground-oil-tank.jpeg"],
     },
   },
   "electric-heating": {
@@ -179,9 +179,9 @@ export const HELP: Record<string, HelpEntry> = {
     description:
       "Electric baseboard heaters are individual heating units installed along the baseboard of a room. Each unit operates independently and uses electrical resistance coils to generate warmth.",
     image: {
-      src: "/images/electric-baseboard.webp",
+      src: "/images/help/heating/electric-baseboard.webp",
       alt: "Electric baseboard heater example",
-      fallbackSrc: ["/images/electric-baseboard.jpg"],
+      fallbackSrc: ["/images/help/heating/electric-baseboard.jpeg"],
     },
   },
   "propane-heating": {
@@ -194,9 +194,9 @@ export const HELP: Record<string, HelpEntry> = {
     description:
       "Propane tanks can be installed above ground or below ground. Above-ground tanks are typically placed in a side or back yard, while underground tanks are buried to save space and improve aesthetics. Each option has specific safety and maintenance requirements.",
     image: {
-      src: "/images/propane-tank.webp",
+      src: "/images/help/heating/propane-tank.webp",
       alt: "Propane tank installation example",
-      fallbackSrc: ["/images/propane-tank.jpg"],
+      fallbackSrc: ["/images/help/heating/propane-tank.jpeg"],
     },
   },
   "wiring-types": {
@@ -209,9 +209,9 @@ export const HELP: Record<string, HelpEntry> = {
         description:
           "The most common wiring type in modern homes. Identified by its rubber outer casing which could be white, grey, black or yellow.",
         image: {
-          src: "/images/help/romex-wiring.webp",
+          src: "/images/help/wiring/romex-wiring.webp",
           alt: "Romex electrical cable showing PVC outer sheath and inner insulated wires",
-          fallbackSrc: ["/images/help/romex-wiring.jpg"],
+          fallbackSrc: ["/images/help/wiring/romex-wiring.jpeg"],
         },
         characteristics: [
           "Non-metallic sheathed cable",
@@ -230,9 +230,9 @@ export const HELP: Record<string, HelpEntry> = {
         description:
           "BX wiring, also known as armored cable, has a flexible metal outer covering that protects the inner wires. It is commonly found in older and modern homes.",
         image: {
-          src: "/images/help/bx-wiring.webp",
+          src: "/images/help/wiring/bx-wiring.webp",
           alt: "BX armored cable showing spiral-wound metal sheath and interior insulated wires",
-          fallbackSrc: ["/images/help/bx-wiring.jpg"],
+          fallbackSrc: ["/images/help/wiring/bx-wiring.jpg"],
         },
         characteristics: [
           "Flexible metal armor protection",
@@ -251,9 +251,9 @@ export const HELP: Record<string, HelpEntry> = {
         description:
           "Conduit is a rigid or flexible metal or plastic tube that protects individual electrical wires. It is commonly used in commercial buildings and modern residential construction.",
         image: {
-          src: "/images/help/conduit-wiring.webp",
+          src: "/images/help/wiring/conduit.webp",
           alt: "Electrical conduit showing metal pipes with wires running through them",
-          fallbackSrc: ["/images/help/conduit-wiring.jpg"],
+          fallbackSrc: ["/images/help/wiring/conduit.jpeg"],
         },
         characteristics: [
           "Rigid or flexible tubing",
@@ -272,9 +272,9 @@ export const HELP: Record<string, HelpEntry> = {
         description:
           "Knob and tube wiring was commonly used in homes built from 1900 to 1940. It consists of ceramic knobs and tubes that secure individual copper wires.",
         image: {
-          src: "/images/help/knob-tube-wiring.webp",
+          src: "/images/help/wiring/knob-tube-wiring.webp",
           alt: "Knob and tube wiring showing white ceramic knobs and tubes with exposed copper wires",
-          fallbackSrc: ["/images/help/knob-tube-wiring.jpg"],
+          fallbackSrc: ["/images/help/wiring/knob-tube-wiring.jpg"],
         },
         characteristics: [
           "Found in pre-1940 homes",
@@ -294,9 +294,9 @@ export const HELP: Record<string, HelpEntry> = {
         description:
           "Aluminum wiring was commonly used in homes built from 1960 to 1979. It looks similar to Romex but requires special connectors and installation methods.",
         image: {
-          src: "/images/help/aluminum-wiring.webp",
+          src: "/images/help/wiring/aluminum-wiring.webp",
           alt: "Aluminum electrical cable with stamped markings identifying it as aluminum wiring",
-          fallbackSrc: ["/images/help/aluminum-wiring.jpg"],
+          fallbackSrc: ["/images/help/wiring/aluminum-wiring.jpeg"],
         },
         characteristics: [
           "Used in homes built 1960-1979",
@@ -335,9 +335,9 @@ export const HELP: Record<string, HelpEntry> = {
     description:
       "Knob and tube wiring is an early electrical wiring method used in homes built from approximately 1900 to 1940. It consists of individual copper wires supported by white ceramic knobs and protected by ceramic tubes where passing through wood framing.",
     image: {
-      src: "/images/help/knob-tube-wiring.webp",
+      src: "/images/help/wiring/knob-tube-wiring.webp",
       alt: "Knob and tube wiring with ceramic knobs and tubes on wooden joists",
-      fallbackSrc: ["/images/help/knob-tube-wiring.jpg"],
+      fallbackSrc: ["/images/help/wiring/knob-tube-wiring.jpg"],
     },
     tips: [
       "Knob and tube wiring lacks a ground wire and may not be compatible with modern three-prong outlets.",
@@ -350,9 +350,9 @@ export const HELP: Record<string, HelpEntry> = {
     description:
       "Aluminum wiring was used in residential construction from approximately 1960 to 1979. It appears similar to Romex but is marked with identifying text. Aluminum wiring requires special connectors and installation methods to reduce fire risk.",
     image: {
-      src: "/images/help/aluminum-wiring.webp",
+      src: "/images/help/wiring/aluminum-wiring.webp",
       alt: "Aluminum wiring cable with stamped identification and silver-colored wire ends",
-      fallbackSrc: ["/images/help/aluminum-wiring.jpg"],
+      fallbackSrc: ["/images/help/wiring/aluminum-wiring.jpg"],
     },
     tips: [
       "Look for markings on the cable sheath such as 'ALUMINUM', 'ALCAN', or 'AL/2'.",
@@ -426,9 +426,9 @@ export const HELP: Record<string, HelpEntry> = {
         description:
           "Copper piping is durable, corrosion-resistant, and has been the standard for residential plumbing for decades. It is typically found in homes built from the 1960s through the early 2000s.",
         image: {
-          src: "/images/help/copper-pipe.webp",
+          src: "/images/help/plumbing/plumbing-copper.webp",
           alt: "Copper water pipe showing characteristic reddish-brown color and soldered joints",
-          fallbackSrc: ["/images/help/copper-pipe.jpg"],
+          fallbackSrc: ["/images/help/plumbing/plumbing-copper.jpeg"],
         },
         characteristics: [
           "Long lifespan (50+ years)",
@@ -447,9 +447,9 @@ export const HELP: Record<string, HelpEntry> = {
         description:
           "PEX (cross-linked polyethylene) is a flexible plastic piping commonly used in modern construction and home renovations.",
         image: {
-          src: "/images/help/pex-pipe.webp",
+          src: "/images/help/plumbing/plumbing-pex.webp",
           alt: "Flexible PEX pipe in red and blue indicating hot and cold water lines",
-          fallbackSrc: ["/images/help/pex-pipe.jpg"],
+          fallbackSrc: ["/images/help/plumbing/plumbing-pex.jpeg"],
         },
         characteristics: [
           "Flexible and easy to install",
@@ -468,9 +468,9 @@ export const HELP: Record<string, HelpEntry> = {
         description:
           "PVC (polyvinyl chloride) is a rigid white plastic pipe commonly used for drain, waste, and vent lines rather than supply lines.",
         image: {
-          src: "/images/help/pvc-pipe.webp",
+          src: "/images/help/plumbing/plumbing-pvc.webp",
           alt: "White PVC pipe with visible diameter markings and fittings",
-          fallbackSrc: ["/images/help/pvc-pipe.jpg"],
+          fallbackSrc: ["/images/help/plumbing/plumbing-pvc.jpg"],
         },
         characteristics: [
           "Lightweight and durable",
@@ -489,9 +489,9 @@ export const HELP: Record<string, HelpEntry> = {
         description:
           "Galvanized steel pipes were commonly used in homes built before the 1960s and are prone to corrosion and mineral buildup over time.",
         image: {
-          src: "/images/help/galvanized-pipe.webp",
+          src: "/images/help/plumbing/plumbing-galvanized.webp",
           alt: "Galvanized steel pipe showing gray metallic surface with threaded connections",
-          fallbackSrc: ["/images/help/galvanized-pipe.jpg"],
+          fallbackSrc: ["/images/help/plumbing/plumbing-galvanized.jpeg"],
         },
         characteristics: [
           "Prone to rust and corrosion over time",
@@ -511,9 +511,9 @@ export const HELP: Record<string, HelpEntry> = {
         description:
           "Polybutylene was a gray or black flexible plastic pipe used from the 1970s to the 1990s. It is known for premature failure and is no longer approved for use.",
         image: {
-          src: "/images/help/polybutylene-pipe.webp",
+          src: "/images/help/plumbing/plumbing-polybutylene.webp",
           alt: "Gray polybutylene pipe with distinctive fittings and markings",
-          fallbackSrc: ["/images/help/polybutylene-pipe.jpg"],
+          fallbackSrc: ["/images/help/plumbing/plumbing-polybutylene.jpeg"],
         },
         characteristics: [
           "Prone to cracking and leaking",
@@ -761,9 +761,9 @@ export const HELP: Record<string, HelpEntry> = {
     description:
       "A swimming pool enclosure is a safety barrier designed to prevent unsupervised access to the pool area. Proper enclosures are critical for safety and are often required by local building codes and insurance policies.",
     image: {
-      src: "/images/help/pool-enclosure.webp",
+      src: "/images/help/fixtures/swimming-pool-enclosure.webp",
       alt: "Swimming pool with a safety fence and self-closing gate around the perimeter",
-      fallbackSrc: ["/images/help/pool-enclosure.jpg"],
+      fallbackSrc: ["/images/help/fixtures/swimming-pool-enclosure.jpg"],
     },
     tips: [
       "Pool enclosures should be at least 4 feet tall with no gaps larger than 4 inches.",
@@ -777,9 +777,9 @@ export const HELP: Record<string, HelpEntry> = {
     description:
       "A pool safety enclosure is a fence, wall, or barrier that surrounds your swimming pool to prevent unauthorized access. Insurance companies require safety enclosures to reduce the risk of accidents and liability.",
     image: {
-      src: "/images/help/pool-safety-fence.webp",
+      src: "/images/help/fixtures/pool-safety-enclosure.webp",
       alt: "Pool safety fence with a self-closing gate and latch mechanism clearly visible",
-      fallbackSrc: ["/images/help/pool-safety-fence.jpg"],
+      fallbackSrc: ["/images/help/fixtures/pool-safety-enclosure.jpeg"],
     },
     tips: [
       "The enclosure must completely surround the pool area.",
@@ -793,9 +793,9 @@ export const HELP: Record<string, HelpEntry> = {
     description:
       "A wood-burning fireplace is a traditional heating feature that burns wood logs for heat and ambiance. Wood-burning fireplaces require regular maintenance and inspection to ensure safe operation.",
     image: {
-      src: "/images/help/wood-fireplace.webp",
+      src: "/images/help/fixtures/wood-burning-fireplace.webp",
       alt: "Wood-burning fireplace with brick hearth, firebox, and chimney visible",
-      fallbackSrc: ["/images/help/wood-fireplace.jpg"],
+      fallbackSrc: ["/images/help/fixtures/wood-burning-fireplace.jpeg"],
     },
     tips: [
       "Have your chimney inspected and cleaned annually by a certified professional.",
@@ -997,7 +997,7 @@ export const PHOTO_GUIDANCE: Record<string, PhotoGuidanceEntry> = {
     ],
   },
   "electrical-panel": {
-    category: "interior",
+    category: "systems",
     title: "Electrical Panel Photo",
     purpose:
       "We use this photo to verify the type, condition, and labeling of your electrical panel.",
@@ -1034,7 +1034,7 @@ export const PHOTO_GUIDANCE: Record<string, PhotoGuidanceEntry> = {
     ],
   },
   "hvac-system": {
-    category: "interior",
+    category: "systems",
     title: "HVAC System Photo",
     purpose:
       "We use this photo to verify the type, condition, and location of your heating and cooling system.",
@@ -1071,7 +1071,7 @@ export const PHOTO_GUIDANCE: Record<string, PhotoGuidanceEntry> = {
     ],
   },
   "water-heater": {
-    category: "interior",
+    category: "systems",
     title: "Water Heater Photo",
     purpose: "We use this photo to verify the type, size, and condition of your water heater.",
     steps: [
@@ -1181,7 +1181,7 @@ export const PHOTO_GUIDANCE: Record<string, PhotoGuidanceEntry> = {
     ],
   },
   "swimming-pool": {
-    category: "exterior",
+    category: "interior",
     title: "Swimming Pool Photo",
     purpose:
       "We use this photo to verify the type, condition, and safety features of your swimming pool.",
@@ -1218,7 +1218,7 @@ export const PHOTO_GUIDANCE: Record<string, PhotoGuidanceEntry> = {
     ],
   },
   "pool-fence": {
-    category: "exterior",
+    category: "interior",
     title: "Pool Fence Photo",
     purpose: "We use this photo to verify that your pool has a compliant safety fence installed.",
     steps: [
@@ -1291,7 +1291,7 @@ export const PHOTO_GUIDANCE: Record<string, PhotoGuidanceEntry> = {
     ],
   },
   "solar-panels": {
-    category: "exterior",
+    category: "systems",
     title: "Solar Panels Photo",
     purpose:
       "We use this photo to verify the installation, condition, and quantity of your solar panels.",
