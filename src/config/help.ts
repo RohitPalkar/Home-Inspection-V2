@@ -806,8 +806,13 @@ export const HELP: Record<string, HelpEntry> = {
   },
 };
 
+function pgPath(category: string, type: string, status: "good" | "bad", ext = "webp") {
+  return `/images/photo-guide/${category}/${type}-${status}.${ext}`;
+}
+
 export const PHOTO_GUIDANCE: Record<string, PhotoGuidanceEntry> = {
   "front-exterior": {
+    category: "exterior",
     title: "Front Exterior Photo",
     purpose:
       "We use this photo to verify the overall condition and appearance of the front of your home, including the facade, entryway, and front yard.",
@@ -819,16 +824,16 @@ export const PHOTO_GUIDANCE: Record<string, PhotoGuidanceEntry> = {
       "Do not zoom — move closer if needed.",
     ],
     goodExample: {
-      src: "/images/photo-guide/front-exterior-good.webp",
+      src: pgPath("exterior", "front-exterior", "good"),
       alt: "Front exterior photo showing the entire front of the house with good lighting and clear details",
       caption: "Entire front visible, sharp image, good lighting, level horizon.",
-      fallbackSrc: ["/images/photo-guide/front-exterior-good.jpg"],
+      fallbackSrc: [pgPath("exterior", "front-exterior", "good", "jpg")],
     },
     badExample: {
-      src: "/images/photo-guide/front-exterior-bad.webp",
+      src: pgPath("exterior", "front-exterior", "bad"),
       alt: "Front exterior photo that is too close and cropped, missing the roofline",
       caption: "Too close — roofline cropped, blurry, heavy shadows.",
-      fallbackSrc: ["/images/photo-guide/front-exterior-bad.jpg"],
+      fallbackSrc: [pgPath("exterior", "front-exterior", "bad", "jpg")],
     },
     tips: [
       "Landscape orientation preferred.",
@@ -844,6 +849,7 @@ export const PHOTO_GUIDANCE: Record<string, PhotoGuidanceEntry> = {
     ],
   },
   "rear-exterior": {
+    category: "exterior",
     title: "Rear Exterior Photo",
     purpose:
       "We use this photo to verify the condition of the rear of your home, including the back facade, deck or patio, and rear yard.",
@@ -855,16 +861,16 @@ export const PHOTO_GUIDANCE: Record<string, PhotoGuidanceEntry> = {
       "Do not zoom — move closer if needed.",
     ],
     goodExample: {
-      src: "/images/photo-guide/rear-exterior-good.webp",
+      src: pgPath("exterior", "rear-exterior", "good"),
       alt: "Rear exterior photo showing the full back of the house with clear details",
       caption: "Full rear elevation visible, good lighting, sharp focus.",
-      fallbackSrc: ["/images/photo-guide/rear-exterior-good.jpg"],
+      fallbackSrc: [pgPath("exterior", "rear-exterior", "good", "jpg")],
     },
     badExample: {
-      src: "/images/photo-guide/rear-exterior-bad.webp",
+      src: pgPath("exterior", "rear-exterior", "bad"),
       alt: "Rear exterior photo obstructed by trees and heavy shadows",
       caption: "Trees blocking the view, heavy shadows, image too dark.",
-      fallbackSrc: ["/images/photo-guide/rear-exterior-bad.jpg"],
+      fallbackSrc: [pgPath("exterior", "rear-exterior", "bad", "jpg")],
     },
     tips: [
       "Landscape orientation preferred.",
@@ -880,6 +886,7 @@ export const PHOTO_GUIDANCE: Record<string, PhotoGuidanceEntry> = {
     ],
   },
   "left-exterior": {
+    category: "exterior",
     title: "Left Side Exterior Photo",
     purpose:
       "We use this photo to verify the condition of the left side of your home, including siding, windows, and any side entrances.",
@@ -891,16 +898,16 @@ export const PHOTO_GUIDANCE: Record<string, PhotoGuidanceEntry> = {
       "Do not zoom — move closer if needed.",
     ],
     goodExample: {
-      src: "/images/photo-guide/left-exterior-good.webp",
+      src: pgPath("exterior", "left-exterior", "good"),
       alt: "Left side exterior photo showing the full side elevation clearly",
       caption: "Full side elevation visible, clear details, good lighting.",
-      fallbackSrc: ["/images/photo-guide/left-exterior-good.jpg"],
+      fallbackSrc: [pgPath("exterior", "left-exterior", "good", "jpg")],
     },
     badExample: {
-      src: "/images/photo-guide/left-exterior-bad.webp",
+      src: pgPath("exterior", "left-exterior", "bad"),
       alt: "Left side exterior photo that is too close and cropped",
       caption: "Too close — roof and foundation cropped, poor angle.",
-      fallbackSrc: ["/images/photo-guide/left-exterior-bad.jpg"],
+      fallbackSrc: [pgPath("exterior", "left-exterior", "bad", "jpg")],
     },
     tips: [
       "Landscape orientation preferred.",
@@ -916,6 +923,7 @@ export const PHOTO_GUIDANCE: Record<string, PhotoGuidanceEntry> = {
     ],
   },
   "right-exterior": {
+    category: "exterior",
     title: "Right Side Exterior Photo",
     purpose:
       "We use this photo to verify the condition of the right side of your home, including siding, windows, and any side entrances.",
@@ -927,16 +935,16 @@ export const PHOTO_GUIDANCE: Record<string, PhotoGuidanceEntry> = {
       "Do not zoom — move closer if needed.",
     ],
     goodExample: {
-      src: "/images/photo-guide/right-exterior-good.webp",
+      src: pgPath("exterior", "right-exterior", "good"),
       alt: "Right side exterior photo showing the full side elevation clearly",
       caption: "Full side elevation visible, clear details, good lighting.",
-      fallbackSrc: ["/images/photo-guide/right-exterior-good.jpg"],
+      fallbackSrc: [pgPath("exterior", "right-exterior", "good", "jpg")],
     },
     badExample: {
-      src: "/images/photo-guide/right-exterior-bad.webp",
+      src: pgPath("exterior", "right-exterior", "bad"),
       alt: "Right side exterior photo that is blurry and poorly lit",
       caption: "Blurry image, poor lighting, roof not fully visible.",
-      fallbackSrc: ["/images/photo-guide/right-exterior-bad.jpg"],
+      fallbackSrc: [pgPath("exterior", "right-exterior", "bad", "jpg")],
     },
     tips: [
       "Landscape orientation preferred.",
@@ -952,6 +960,7 @@ export const PHOTO_GUIDANCE: Record<string, PhotoGuidanceEntry> = {
     ],
   },
   "roof-overview": {
+    category: "exterior",
     title: "Roof Overview Photo",
     purpose:
       "We use this photo to verify the overall condition of your roof, including shingles, flashing, and any visible damage.",
@@ -963,16 +972,16 @@ export const PHOTO_GUIDANCE: Record<string, PhotoGuidanceEntry> = {
       "Do not zoom — move farther back if needed.",
     ],
     goodExample: {
-      src: "/images/photo-guide/roof-overview-good.webp",
+      src: pgPath("exterior", "roof-overview", "good"),
       alt: "Roof overview showing the entire roof with clear details and good lighting",
       caption: "Entire roof visible, good lighting, sharp focus, no obstructions.",
-      fallbackSrc: ["/images/photo-guide/roof-overview-good.jpg"],
+      fallbackSrc: [pgPath("exterior", "roof-overview", "good", "jpg")],
     },
     badExample: {
-      src: "/images/photo-guide/roof-overview-bad.webp",
+      src: pgPath("exterior", "roof-overview", "bad"),
       alt: "Roof overview that is cropped and partially blocked by trees",
       caption: "Roof cropped, trees blocking sections, heavy shadows.",
-      fallbackSrc: ["/images/photo-guide/roof-overview-bad.jpg"],
+      fallbackSrc: [pgPath("exterior", "roof-overview", "bad", "jpg")],
     },
     tips: [
       "Landscape orientation preferred.",
@@ -988,6 +997,7 @@ export const PHOTO_GUIDANCE: Record<string, PhotoGuidanceEntry> = {
     ],
   },
   "electrical-panel": {
+    category: "interior",
     title: "Electrical Panel Photo",
     purpose:
       "We use this photo to verify the type, condition, and labeling of your electrical panel.",
@@ -999,16 +1009,16 @@ export const PHOTO_GUIDANCE: Record<string, PhotoGuidanceEntry> = {
       "Take a second close-up of the panel label if visible.",
     ],
     goodExample: {
-      src: "/images/photo-guide/electrical-panel-good.webp",
+      src: pgPath("interior", "electrical-panel", "good"),
       alt: "Electrical panel with the door open showing all breakers clearly",
       caption: "Panel fully visible, all breakers clear, good lighting, label readable.",
-      fallbackSrc: ["/images/photo-guide/electrical-panel-good.jpg"],
+      fallbackSrc: [pgPath("interior", "electrical-panel", "good", "jpg")],
     },
     badExample: {
-      src: "/images/photo-guide/electrical-panel-bad.webp",
+      src: pgPath("interior", "electrical-panel", "bad"),
       alt: "Electrical panel photo that is dark and blurry",
       caption: "Too dark, blurry, breakers not distinguishable.",
-      fallbackSrc: ["/images/photo-guide/electrical-panel-bad.jpg"],
+      fallbackSrc: [pgPath("interior", "electrical-panel", "bad", "jpg")],
     },
     tips: [
       "Use flash if the panel is in a dark area.",
@@ -1024,6 +1034,7 @@ export const PHOTO_GUIDANCE: Record<string, PhotoGuidanceEntry> = {
     ],
   },
   "hvac-system": {
+    category: "interior",
     title: "HVAC System Photo",
     purpose:
       "We use this photo to verify the type, condition, and location of your heating and cooling system.",
@@ -1035,16 +1046,16 @@ export const PHOTO_GUIDANCE: Record<string, PhotoGuidanceEntry> = {
       "Include surrounding area for context.",
     ],
     goodExample: {
-      src: "/images/photo-guide/hvac-system-good.webp",
+      src: pgPath("interior", "hvac-system", "good"),
       alt: "HVAC system showing the entire unit with visible manufacturer label",
       caption: "Full unit visible, label readable, good lighting, clear surroundings.",
-      fallbackSrc: ["/images/photo-guide/hvac-system-good.jpg"],
+      fallbackSrc: [pgPath("interior", "hvac-system", "good", "jpg")],
     },
     badExample: {
-      src: "/images/photo-guide/hvac-system-bad.webp",
+      src: pgPath("interior", "hvac-system", "bad"),
       alt: "HVAC system photo that is too close and cluttered",
       caption: "Too close — unit cropped, clutter in frame, poor lighting.",
-      fallbackSrc: ["/images/photo-guide/hvac-system-bad.jpg"],
+      fallbackSrc: [pgPath("interior", "hvac-system", "bad", "jpg")],
     },
     tips: [
       "Clear clutter around the unit before taking the photo.",
@@ -1060,6 +1071,7 @@ export const PHOTO_GUIDANCE: Record<string, PhotoGuidanceEntry> = {
     ],
   },
   "water-heater": {
+    category: "interior",
     title: "Water Heater Photo",
     purpose: "We use this photo to verify the type, size, and condition of your water heater.",
     steps: [
@@ -1070,16 +1082,16 @@ export const PHOTO_GUIDANCE: Record<string, PhotoGuidanceEntry> = {
       "Include the piping connections at the top.",
     ],
     goodExample: {
-      src: "/images/photo-guide/water-heater-good.webp",
+      src: pgPath("interior", "water-heater", "good"),
       alt: "Water heater showing the full unit with visible label and connections",
       caption: "Full unit visible, label readable, piping connections clear.",
-      fallbackSrc: ["/images/photo-guide/water-heater-good.jpg"],
+      fallbackSrc: [pgPath("interior", "water-heater", "good", "jpg")],
     },
     badExample: {
-      src: "/images/photo-guide/water-heater-bad.webp",
+      src: pgPath("interior", "water-heater", "bad"),
       alt: "Water heater photo that is cropped and dark",
       caption: "Cropped — top connections cut off, dark image, no label visible.",
-      fallbackSrc: ["/images/photo-guide/water-heater-bad.jpg"],
+      fallbackSrc: [pgPath("interior", "water-heater", "bad", "jpg")],
     },
     tips: [
       "Use flash in dark utility rooms.",
@@ -1095,6 +1107,7 @@ export const PHOTO_GUIDANCE: Record<string, PhotoGuidanceEntry> = {
     ],
   },
   kitchen: {
+    category: "interior",
     title: "Kitchen Photo",
     purpose:
       "We use this photo to verify the condition of your kitchen, including countertops, cabinetry, appliances, and plumbing fixtures.",
@@ -1106,16 +1119,16 @@ export const PHOTO_GUIDANCE: Record<string, PhotoGuidanceEntry> = {
       "Include sink, stove, and refrigerator in at least one photo.",
     ],
     goodExample: {
-      src: "/images/photo-guide/kitchen-good.webp",
+      src: pgPath("interior", "kitchen", "good"),
       alt: "Wide kitchen shot showing countertops, cabinets, and appliances clearly",
       caption: "Full kitchen visible, good lighting, all major appliances shown.",
-      fallbackSrc: ["/images/photo-guide/kitchen-good.jpg"],
+      fallbackSrc: [pgPath("interior", "kitchen", "good", "jpg")],
     },
     badExample: {
-      src: "/images/photo-guide/kitchen-bad.webp",
+      src: pgPath("interior", "kitchen", "bad"),
       alt: "Kitchen photo that is too close and cluttered",
       caption: "Too close — only partial view, cluttered counters, poor angle.",
-      fallbackSrc: ["/images/photo-guide/kitchen-bad.jpg"],
+      fallbackSrc: [pgPath("interior", "kitchen", "bad", "jpg")],
     },
     tips: [
       "Turn on all lights before taking photos.",
@@ -1131,6 +1144,7 @@ export const PHOTO_GUIDANCE: Record<string, PhotoGuidanceEntry> = {
     ],
   },
   bathroom: {
+    category: "interior",
     title: "Bathroom Photo",
     purpose:
       "We use this photo to verify the condition of your bathroom, including fixtures, ventilation, and overall condition.",
@@ -1142,16 +1156,16 @@ export const PHOTO_GUIDANCE: Record<string, PhotoGuidanceEntry> = {
       "Include any exhaust fan or window.",
     ],
     goodExample: {
-      src: "/images/photo-guide/bathroom-good.webp",
+      src: pgPath("interior", "bathroom", "good"),
       alt: "Bathroom showing all fixtures clearly with good lighting",
       caption: "Full bathroom visible, all fixtures shown, good lighting, clean.",
-      fallbackSrc: ["/images/photo-guide/bathroom-good.jpg"],
+      fallbackSrc: [pgPath("interior", "bathroom", "good", "jpg")],
     },
     badExample: {
-      src: "/images/photo-guide/bathroom-bad.webp",
+      src: pgPath("interior", "bathroom", "bad"),
       alt: "Bathroom photo that is dark and partially blocked",
       caption: "Dark image, toilet partially blocked, mirror reflection causes glare.",
-      fallbackSrc: ["/images/photo-guide/bathroom-bad.jpg"],
+      fallbackSrc: [pgPath("interior", "bathroom", "bad", "jpg")],
     },
     tips: [
       "Turn on all bathroom lights.",
@@ -1167,6 +1181,7 @@ export const PHOTO_GUIDANCE: Record<string, PhotoGuidanceEntry> = {
     ],
   },
   "swimming-pool": {
+    category: "exterior",
     title: "Swimming Pool Photo",
     purpose:
       "We use this photo to verify the type, condition, and safety features of your swimming pool.",
@@ -1178,16 +1193,16 @@ export const PHOTO_GUIDANCE: Record<string, PhotoGuidanceEntry> = {
       "Include the pool cover if applicable.",
     ],
     goodExample: {
-      src: "/images/photo-guide/swimming-pool-good.webp",
+      src: pgPath("exterior", "swimming-pool", "good"),
       alt: "Swimming pool showing the full pool area with clear water and surroundings",
       caption: "Full pool visible, clear water, good lighting, surroundings shown.",
-      fallbackSrc: ["/images/photo-guide/swimming-pool-good.jpg"],
+      fallbackSrc: [pgPath("exterior", "swimming-pool", "good", "jpg")],
     },
     badExample: {
-      src: "/images/photo-guide/swimming-pool-bad.webp",
+      src: pgPath("exterior", "swimming-pool", "bad"),
       alt: "Swimming pool photo that is too close and shows only part of the pool",
       caption: "Too close — only partial pool visible, heavy shadows, poor angle.",
-      fallbackSrc: ["/images/photo-guide/swimming-pool-bad.jpg"],
+      fallbackSrc: [pgPath("exterior", "swimming-pool", "bad", "jpg")],
     },
     tips: [
       "Landscape orientation preferred for pools.",
@@ -1203,6 +1218,7 @@ export const PHOTO_GUIDANCE: Record<string, PhotoGuidanceEntry> = {
     ],
   },
   "pool-fence": {
+    category: "exterior",
     title: "Pool Fence Photo",
     purpose: "We use this photo to verify that your pool has a compliant safety fence installed.",
     steps: [
@@ -1213,16 +1229,16 @@ export const PHOTO_GUIDANCE: Record<string, PhotoGuidanceEntry> = {
       "Show any gaps or openings in the fence.",
     ],
     goodExample: {
-      src: "/images/photo-guide/pool-fence-good.webp",
+      src: pgPath("exterior", "pool-fence", "good"),
       alt: "Pool fence showing the full fence line with visible gate and latch",
       caption: "Full fence line visible, gate and latch clear, no gaps visible.",
-      fallbackSrc: ["/images/photo-guide/pool-fence-good.jpg"],
+      fallbackSrc: [pgPath("exterior", "pool-fence", "good", "jpg")],
     },
     badExample: {
-      src: "/images/photo-guide/pool-fence-bad.webp",
+      src: pgPath("exterior", "pool-fence", "bad"),
       alt: "Pool fence photo that is too close and shows only a section of the fence",
       caption: "Too close — only partial fence visible, gate not shown.",
-      fallbackSrc: ["/images/photo-guide/pool-fence-bad.jpg"],
+      fallbackSrc: [pgPath("exterior", "pool-fence", "bad", "jpg")],
     },
     tips: [
       "Landscape orientation preferred.",
@@ -1238,6 +1254,7 @@ export const PHOTO_GUIDANCE: Record<string, PhotoGuidanceEntry> = {
     ],
   },
   fireplace: {
+    category: "interior",
     title: "Fireplace / Hearth Photo",
     purpose:
       "We use this photo to verify the type, condition, and venting system of your fireplace or hearth.",
@@ -1249,16 +1266,16 @@ export const PHOTO_GUIDANCE: Record<string, PhotoGuidanceEntry> = {
       "Include the mantel and surrounding wall area.",
     ],
     goodExample: {
-      src: "/images/photo-guide/fireplace-good.webp",
+      src: pgPath("interior", "fireplace", "good"),
       alt: "Fireplace showing the full hearth, firebox, and mantel clearly",
       caption: "Full fireplace visible, hearth clear, mantel and surround shown.",
-      fallbackSrc: ["/images/photo-guide/fireplace-good.jpg"],
+      fallbackSrc: [pgPath("interior", "fireplace", "good", "jpg")],
     },
     badExample: {
-      src: "/images/photo-guide/fireplace-bad.webp",
+      src: pgPath("interior", "fireplace", "bad"),
       alt: "Fireplace photo that is too close and shows only the firebox",
       caption: "Too close — only firebox visible, hearth and surround cropped.",
-      fallbackSrc: ["/images/photo-guide/fireplace-bad.jpg"],
+      fallbackSrc: [pgPath("interior", "fireplace", "bad", "jpg")],
     },
     tips: [
       "Landscape orientation preferred.",
@@ -1274,6 +1291,7 @@ export const PHOTO_GUIDANCE: Record<string, PhotoGuidanceEntry> = {
     ],
   },
   "solar-panels": {
+    category: "exterior",
     title: "Solar Panels Photo",
     purpose:
       "We use this photo to verify the installation, condition, and quantity of your solar panels.",
@@ -1285,16 +1303,16 @@ export const PHOTO_GUIDANCE: Record<string, PhotoGuidanceEntry> = {
       "Take the photo during daylight hours.",
     ],
     goodExample: {
-      src: "/images/photo-guide/solar-panels-good.webp",
+      src: pgPath("exterior", "solar-panels", "good"),
       alt: "Solar panels on roof showing all panels clearly with good lighting",
       caption: "All panels visible, good lighting, clear roof context.",
-      fallbackSrc: ["/images/photo-guide/solar-panels-good.jpg"],
+      fallbackSrc: [pgPath("exterior", "solar-panels", "good", "jpg")],
     },
     badExample: {
-      src: "/images/photo-guide/solar-panels-bad.webp",
+      src: pgPath("exterior", "solar-panels", "bad"),
       alt: "Solar panel photo that is too close and shows only a few panels",
       caption: "Too close — only partial array visible, heavy shadows.",
-      fallbackSrc: ["/images/photo-guide/solar-panels-bad.jpg"],
+      fallbackSrc: [pgPath("exterior", "solar-panels", "bad", "jpg")],
     },
     tips: [
       "Landscape orientation preferred.",
@@ -1310,6 +1328,7 @@ export const PHOTO_GUIDANCE: Record<string, PhotoGuidanceEntry> = {
     ],
   },
   "detached-garage": {
+    category: "exterior",
     title: "Detached Garage Photo",
     purpose:
       "We use this photo to verify the condition and construction of your detached garage or carport.",
@@ -1321,16 +1340,16 @@ export const PHOTO_GUIDANCE: Record<string, PhotoGuidanceEntry> = {
       "Include the surrounding area for context.",
     ],
     goodExample: {
-      src: "/images/photo-guide/detached-garage-good.webp",
+      src: pgPath("exterior", "detached-garage", "good"),
       alt: "Detached garage showing the full structure with clear details",
       caption: "Full structure visible, good lighting, all sides shown.",
-      fallbackSrc: ["/images/photo-guide/detached-garage-good.jpg"],
+      fallbackSrc: [pgPath("exterior", "detached-garage", "good", "jpg")],
     },
     badExample: {
-      src: "/images/photo-guide/detached-garage-bad.webp",
+      src: pgPath("exterior", "detached-garage", "bad"),
       alt: "Detached garage photo that is too close and partially hidden",
       caption: "Too close — roofline cropped, vegetation blocking the view.",
-      fallbackSrc: ["/images/photo-guide/detached-garage-bad.jpg"],
+      fallbackSrc: [pgPath("exterior", "detached-garage", "bad", "jpg")],
     },
     tips: [
       "Landscape orientation preferred.",
@@ -1346,6 +1365,7 @@ export const PHOTO_GUIDANCE: Record<string, PhotoGuidanceEntry> = {
     ],
   },
   "other-structures": {
+    category: "exterior",
     title: "Other Structures Photo",
     purpose:
       "We use this photo to verify any additional structures on your property, such as sheds, barns, or guest houses.",
@@ -1357,16 +1377,16 @@ export const PHOTO_GUIDANCE: Record<string, PhotoGuidanceEntry> = {
       "Include the structure in relation to the main home.",
     ],
     goodExample: {
-      src: "/images/photo-guide/other-structures-good.webp",
+      src: pgPath("exterior", "other-structures", "good"),
       alt: "Shed or outbuilding showing the full structure with clear details",
       caption: "Full structure visible, good lighting, surroundings shown.",
-      fallbackSrc: ["/images/photo-guide/other-structures-good.jpg"],
+      fallbackSrc: [pgPath("exterior", "other-structures", "good", "jpg")],
     },
     badExample: {
-      src: "/images/photo-guide/other-structures-bad.webp",
+      src: pgPath("exterior", "other-structures", "bad"),
       alt: "Outbuilding photo that is too close and partially blocked",
       caption: "Too close — structure cropped, vegetation blocking, dark.",
-      fallbackSrc: ["/images/photo-guide/other-structures-bad.jpg"],
+      fallbackSrc: [pgPath("exterior", "other-structures", "bad", "jpg")],
     },
     tips: [
       "Landscape orientation preferred.",
