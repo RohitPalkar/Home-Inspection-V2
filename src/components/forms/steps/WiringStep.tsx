@@ -41,7 +41,10 @@ export function WiringStep({ data, update, onNext, onBack, onHelp }: WiringStepP
         </div>
 
         <div className="mt-4 text-center">
-          <HelpLink label="What are the different wiring types?" onClick={() => openHelp("wiring-types", onHelp)} />
+          <HelpLink
+            label="What are the different wiring types?"
+            onClick={() => openHelp("wiring-types", onHelp)}
+          />
         </div>
 
         <NavFooter onBack={onBack} onNext={onNext} nextDisabled={data.wiring.length === 0} />

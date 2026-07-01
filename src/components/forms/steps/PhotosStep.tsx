@@ -6,7 +6,11 @@ import { NavFooter } from "@/components/forms/NavFooter";
 import { FileDropZone } from "@/components/forms/FileDropZone";
 import { SectionHeader } from "@/components/forms/SectionHeader";
 import { PhotoGuidanceDialog } from "@/components/forms/PhotoGuidanceDialog";
-import { SURVEY_SECTIONS, PHOTO_REQUIREMENTS, CONDITIONAL_PHOTO_REQUIREMENTS } from "@/config/survey";
+import {
+  SURVEY_SECTIONS,
+  PHOTO_REQUIREMENTS,
+  CONDITIONAL_PHOTO_REQUIREMENTS,
+} from "@/config/survey";
 import { PHOTO_GUIDANCE } from "@/config/help";
 import type { SurveyData, SurveyUpdater, HelpContent } from "@/types/survey";
 import type { PhotoRequirement } from "@/config/survey";

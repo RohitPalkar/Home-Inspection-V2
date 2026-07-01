@@ -18,7 +18,13 @@ interface InfrastructureStepProps {
   onHelp?: (c: HelpContent) => void;
 }
 
-export function InfrastructureStep({ data, update, onNext, onBack, onHelp }: InfrastructureStepProps) {
+export function InfrastructureStep({
+  data,
+  update,
+  onNext,
+  onBack,
+  onHelp,
+}: InfrastructureStepProps) {
   const yearNum = parseInt(data.yearBuilt, 10);
   const isHistoric = !isNaN(yearNum) && yearNum < 1941;
 
@@ -67,7 +73,10 @@ export function InfrastructureStep({ data, update, onNext, onBack, onHelp }: Inf
             />
             {onHelp && (
               <div className="mt-1.5">
-                <HelpLink label="What are protective devices?" onClick={() => openHelp("protective-devices", onHelp)} />
+                <HelpLink
+                  label="What are protective devices?"
+                  onClick={() => openHelp("protective-devices", onHelp)}
+                />
               </div>
             )}
           </div>
@@ -88,7 +97,10 @@ export function InfrastructureStep({ data, update, onNext, onBack, onHelp }: Inf
             />
             {onHelp && (
               <div className="mt-1.5">
-                <HelpLink label="What is plumbing material?" onClick={() => openHelp("plumbing-material", onHelp)} />
+                <HelpLink
+                  label="What is plumbing material?"
+                  onClick={() => openHelp("plumbing-material", onHelp)}
+                />
               </div>
             )}
           </div>

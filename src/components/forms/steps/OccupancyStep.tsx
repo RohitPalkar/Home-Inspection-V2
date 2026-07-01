@@ -40,7 +40,10 @@ export function OccupancyStep({ data, update, onNext, onBack, onHelp }: Occupanc
         </div>
 
         <div className="mt-4 text-center">
-          <HelpLink label="What is dwelling type?" onClick={() => openHelp("dwelling-type", onHelp)} />
+          <HelpLink
+            label="What is dwelling type?"
+            onClick={() => openHelp("dwelling-type", onHelp)}
+          />
         </div>
 
         {data.occupancy === "owner" && (

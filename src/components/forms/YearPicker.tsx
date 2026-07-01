@@ -193,7 +193,13 @@ export function YearPicker({
           {input}
           {open && (
             <div className="fixed inset-0 z-50 flex items-end">
-              <div className="fixed inset-0 bg-black/40" onClick={() => { setOpen(false); inputRef.current?.focus(); }} />
+              <div
+                className="fixed inset-0 bg-black/40"
+                onClick={() => {
+                  setOpen(false);
+                  inputRef.current?.focus();
+                }}
+              />
               <div
                 role="dialog"
                 aria-label="Select a year"
@@ -213,9 +219,7 @@ export function YearPicker({
         </>
       ) : (
         <Popover open={open} onOpenChange={setOpen}>
-          <PopoverTrigger asChild>
-            {input}
-          </PopoverTrigger>
+          <PopoverTrigger asChild>{input}</PopoverTrigger>
           <PopoverContent
             side="bottom"
             align="end"

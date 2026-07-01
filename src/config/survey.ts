@@ -15,9 +15,7 @@ export const HEATING_QUESTION: RadioQuestionConfig = {
   id: "heatingFuel",
   label: "Heating Fuel Type",
   required: true,
-  helpLinks: [
-    { label: "What is a heating system?", entryKey: "heating-system" },
-  ],
+  helpLinks: [{ label: "What is a heating system?", entryKey: "heating-system" }],
   options: [
     {
       label: "Gas",
@@ -26,9 +24,7 @@ export const HEATING_QUESTION: RadioQuestionConfig = {
         id: "gasMeterPresent",
         label: "Gas Meter Present?",
         required: true,
-        helpLinks: [
-          { label: "What is a gas meter?", entryKey: "gas-meter" },
-        ],
+        helpLinks: [{ label: "What is a gas meter?", entryKey: "gas-meter" }],
         options: [
           { label: "Yes", value: "true" },
           { label: "No", value: "false" },
@@ -104,15 +100,9 @@ export const CONDITIONAL_PHOTO_REQUIREMENTS: Record<string, PhotoRequirement[]> 
     { key: "pool", label: "Swimming Pool Photo", guidanceKey: "swimming-pool" },
     { key: "pool-fence", label: "Pool Fence Photo", guidanceKey: "pool-fence" },
   ],
-  fireplace: [
-    { key: "fireplace", label: "Fireplace / Hearth Photo", guidanceKey: "fireplace" },
-  ],
-  solar: [
-    { key: "solar", label: "Solar Panels Photo", guidanceKey: "solar-panels" },
-  ],
-  garage: [
-    { key: "garage", label: "Detached Garage Photo", guidanceKey: "detached-garage" },
-  ],
+  fireplace: [{ key: "fireplace", label: "Fireplace / Hearth Photo", guidanceKey: "fireplace" }],
+  solar: [{ key: "solar", label: "Solar Panels Photo", guidanceKey: "solar-panels" }],
+  garage: [{ key: "garage", label: "Detached Garage Photo", guidanceKey: "detached-garage" }],
   structures: [
     { key: "other-structures", label: "Other Structures Photo", guidanceKey: "other-structures" },
   ],

@@ -2,7 +2,14 @@ import { FieldLabel } from "@/components/forms/FieldLabel";
 import { RadioRow } from "@/components/forms/RadioRow";
 import { HelpLink } from "@/components/forms/HelpLink";
 import { toHelpContent } from "@/components/forms/help-utils";
-import type { SurveyData, SurveyUpdater, HelpContent, RadioQuestionConfig, ConditionalQuestionConfig, HelpLinkDef } from "@/types/survey";
+import type {
+  SurveyData,
+  SurveyUpdater,
+  HelpContent,
+  RadioQuestionConfig,
+  ConditionalQuestionConfig,
+  HelpLinkDef,
+} from "@/types/survey";
 
 function HelpLinksGroup({
   links,
@@ -16,10 +23,7 @@ function HelpLinksGroup({
     <div className="space-y-1">
       {links.map((link) => (
         <div key={link.entryKey} className="flex justify-center">
-          <HelpLink
-            label={link.label}
-            onClick={() => onHelp(toHelpContent(link.entryKey))}
-          />
+          <HelpLink label={link.label} onClick={() => onHelp(toHelpContent(link.entryKey))} />
         </div>
       ))}
     </div>

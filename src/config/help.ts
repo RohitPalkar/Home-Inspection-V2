@@ -202,7 +202,7 @@ export const HELP: Record<string, HelpEntry> = {
   "wiring-types": {
     title: "What are the different wiring types?",
     description:
-      "The wiring in your home is primarily located inside the walls and hidden from view. It is often visible in unfinished areas such as a garage or basement. If you are unable to visibly verify the wiring type, please select \"Unknown\".",
+      'The wiring in your home is primarily located inside the walls and hidden from view. It is often visible in unfinished areas such as a garage or basement. If you are unable to visibly verify the wiring type, please select "Unknown".',
     sections: [
       {
         title: "Romex",
@@ -313,7 +313,7 @@ export const HELP: Record<string, HelpEntry> = {
       {
         title: "Other",
         description:
-          "If your wiring does not match any of the common types described above, select \"Other\". This includes specialty wiring, old systems, or unique installations.",
+          'If your wiring does not match any of the common types described above, select "Other". This includes specialty wiring, old systems, or unique installations.',
         characteristics: [
           "Does not match standard categories",
           "May be a specialty or regional type",
@@ -327,7 +327,7 @@ export const HELP: Record<string, HelpEntry> = {
     ],
     tips: [
       "Check exposed wiring in the basement, attic, garage, or behind the electrical panel cover.",
-      "If you cannot identify the wiring type, select \"Unknown\" — this is better than guessing incorrectly.",
+      'If you cannot identify the wiring type, select "Unknown" — this is better than guessing incorrectly.',
     ],
   },
   "knob-tube-wiring": {
@@ -1061,8 +1061,7 @@ export const PHOTO_GUIDANCE: Record<string, PhotoGuidanceEntry> = {
   },
   "water-heater": {
     title: "Water Heater Photo",
-    purpose:
-      "We use this photo to verify the type, size, and condition of your water heater.",
+    purpose: "We use this photo to verify the type, size, and condition of your water heater.",
     steps: [
       "Locate the water heater.",
       "Stand far enough back to capture the entire unit.",
@@ -1205,8 +1204,7 @@ export const PHOTO_GUIDANCE: Record<string, PhotoGuidanceEntry> = {
   },
   "pool-fence": {
     title: "Pool Fence Photo",
-    purpose:
-      "We use this photo to verify that your pool has a compliant safety fence installed.",
+    purpose: "We use this photo to verify that your pool has a compliant safety fence installed.",
     steps: [
       "Stand far enough to capture the full fence line.",
       "Show the gate, latch, and locking mechanism.",

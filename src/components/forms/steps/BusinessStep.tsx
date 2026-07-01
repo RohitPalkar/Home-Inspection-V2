@@ -72,7 +72,10 @@ export function BusinessStep({ data, update, onNext, onBack, onHelp }: BusinessS
           </div>
           {onHelp && (
             <div className="mt-1.5">
-              <HelpLink label="What is a swimming pool enclosure?" onClick={() => openHelp("swimming-pool-enclosure", onHelp)} />
+              <HelpLink
+                label="What is a swimming pool enclosure?"
+                onClick={() => openHelp("swimming-pool-enclosure", onHelp)}
+              />
             </div>
           )}
         </div>
@@ -111,7 +114,10 @@ export function BusinessStep({ data, update, onNext, onBack, onHelp }: BusinessS
                 />
               </div>
               <div className="mt-1.5">
-                <HelpLink label="What are pool safety enclosure requirements?" onClick={() => openHelp("pool-safety-enclosure", onHelp)} />
+                <HelpLink
+                  label="What are pool safety enclosure requirements?"
+                  onClick={() => openHelp("pool-safety-enclosure", onHelp)}
+                />
               </div>
             </div>
             <div>

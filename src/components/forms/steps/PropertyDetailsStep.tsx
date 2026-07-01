@@ -18,7 +18,13 @@ interface PropertyDetailsStepProps {
   onHelp?: (p: HelpContent) => void;
 }
 
-export function PropertyDetailsStep({ data, update, onNext, onBack, onHelp }: PropertyDetailsStepProps) {
+export function PropertyDetailsStep({
+  data,
+  update,
+  onNext,
+  onBack,
+  onHelp,
+}: PropertyDetailsStepProps) {
   return (
     <div className="max-w-3xl mx-auto">
       <div>
@@ -54,7 +60,10 @@ export function PropertyDetailsStep({ data, update, onNext, onBack, onHelp }: Pr
           </div>
           {onHelp && (
             <div className="mt-1.5">
-              <HelpLink label="How does roof age affect my policy?" onClick={() => openHelp("roof-age", onHelp)} />
+              <HelpLink
+                label="How does roof age affect my policy?"
+                onClick={() => openHelp("roof-age", onHelp)}
+              />
             </div>
           )}
         </div>
@@ -89,7 +98,10 @@ export function PropertyDetailsStep({ data, update, onNext, onBack, onHelp }: Pr
           </div>
           {onHelp && (
             <div className="mt-1.5">
-              <HelpLink label="What is foundation type?" onClick={() => openHelp("foundation-type", onHelp)} />
+              <HelpLink
+                label="What is foundation type?"
+                onClick={() => openHelp("foundation-type", onHelp)}
+              />
             </div>
           )}
         </div>

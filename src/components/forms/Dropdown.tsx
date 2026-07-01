@@ -103,12 +103,7 @@ export function Dropdown({
     if (disabled) return;
 
     if (!isOpen) {
-      if (
-        e.key === "Enter" ||
-        e.key === " " ||
-        e.key === "ArrowDown" ||
-        e.key === "ArrowUp"
-      ) {
+      if (e.key === "Enter" || e.key === " " || e.key === "ArrowDown" || e.key === "ArrowUp") {
         e.preventDefault();
         setIsOpen(true);
       }
@@ -197,7 +192,6 @@ export function Dropdown({
   const errorMessage = typeof error === "string" ? error : undefined;
   const hasError = !!error;
 
-
   return (
     <div ref={containerRef} className={cn("relative", className)}>
       <button
@@ -221,7 +215,7 @@ export function Dropdown({
         onBlur={handleTriggerBlur}
         disabled={disabled}
         className={cn(
-          "w-full h-12 min-h-[44px] px-3 rounded-lg border bg-card text-left",
+          "w-full h-12 min-h-[44px] pl-3 pr-5 rounded-lg border bg-card text-left",
           "flex items-center justify-between gap-2",
           "focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent",
           "disabled:cursor-not-allowed disabled:opacity-50",
@@ -231,9 +225,7 @@ export function Dropdown({
           selectedLabel && "text-foreground",
         )}
       >
-        <span className="truncate">
-          {selectedLabel || placeholder}
-        </span>
+        <span className="truncate">{selectedLabel || placeholder}</span>
         <ChevronDown
           className={cn(
             "w-4 h-4 shrink-0 text-muted-foreground transition-transform duration-200",
@@ -306,4 +298,3 @@ export function Dropdown({
     </div>
   );
 }
-
