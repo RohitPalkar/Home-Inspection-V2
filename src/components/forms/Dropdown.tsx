@@ -243,13 +243,13 @@ export function Dropdown({
           aria-label={placeholder}
           tabIndex={-1}
           className={cn(
-            "absolute z-50 mt-1 w-full bg-card rounded-lg border border-border shadow-elevated",
-            "max-h-60 overflow-y-auto",
-            "animate-in fade-in-0 zoom-in-95 slide-in-from-top-1 duration-100",
+            "absolute z-50 mt-1 w-full bg-card rounded-xl border border-border shadow-elevated",
+            "max-h-60 overflow-y-auto p-1",
+            "animate-in fade-in-0 zoom-in-95 duration-200",
           )}
         >
           {options.length === 0 ? (
-            <li className="px-3 py-2.5 text-sm text-muted-foreground min-h-[44px] flex items-center">
+            <li className="px-4 py-3 text-sm text-muted-foreground min-h-[44px] flex items-center rounded-lg">
               No options available
             </li>
           ) : (
@@ -271,10 +271,10 @@ export function Dropdown({
                   onKeyDown={(e) => handleItemKeyDown(e, opt, idx)}
                   onMouseEnter={() => setActiveIndex(idx)}
                   className={cn(
-                    "px-3 py-2.5 text-sm cursor-pointer transition-colors",
+                    "px-4 py-3 text-sm cursor-pointer transition-colors rounded-lg",
                     "min-h-[44px] flex items-center",
                     isActive && "bg-accent",
-                    isSelected && "bg-primary/10 font-medium text-foreground",
+                    isSelected && "bg-primary/10 font-medium text-primary",
                     !isSelected && "text-foreground hover:bg-accent",
                   )}
                 >
