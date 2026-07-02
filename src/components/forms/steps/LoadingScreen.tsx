@@ -49,12 +49,13 @@ const TICK_INTERVAL_MS = 40;
 const STATUS_INTERVAL_MS = 2500;
 const TIP_INTERVAL_MS = 4500;
 const SUCCESS_HOLD_MS = 1000;
+const LEAVING_FADE_MS = 400;
 
 /* ───────────────────────────────────────────
    Types
    ─────────────────────────────────────────── */
 
-type Phase = "loading" | "success" | "error";
+type Phase = "loading" | "success" | "leaving" | "error";
 
 interface LoadingScreenProps {
   onComplete: () => void;
@@ -67,11 +68,12 @@ interface LoadingScreenProps {
 function ProgressBar({ value, phase }: { value: number; phase: Phase }) {
   const rm =
     typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const isComplete = phase === "success" || phase === "leaving";
   return (
     <div
       className="relative w-full h-2.5 rounded-full bg-muted overflow-hidden"
       role="progressbar"
-      aria-valuenow={phase === "success" ? 100 : Math.round(value)}
+      aria-valuenow={isComplete ? 100 : Math.round(value)}
       aria-valuemin={0}
       aria-valuemax={100}
       aria-label="Loading progress"
@@ -79,11 +81,10 @@ function ProgressBar({ value, phase }: { value: number; phase: Phase }) {
       <div
         className="h-full rounded-full transition-all duration-300 ease-out relative"
         style={{
-          width: `${phase === "success" ? 100 : value}%`,
-          background:
-            phase === "success"
-              ? "var(--color-success)"
-              : "linear-gradient(90deg, var(--color-primary), var(--color-primary-hover))",
+          width: `${isComplete ? 100 : value}%`,
+          background: isComplete
+            ? "var(--color-success)"
+            : "linear-gradient(90deg, var(--color-primary), var(--color-primary-hover))",
         }}
       >
         {phase === "loading" && !rm && (
@@ -261,10 +262,13 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
   const [tipIndex, setTipIndex] = useState(0);
 
   const cbRef = useRef(onComplete);
+  const attemptRef = useRef(0);
   cbRef.current = onComplete;
 
   useEffect(() => {
     if (phase !== "loading") return;
+    attemptRef.current += 1;
+    const isFirstAttempt = attemptRef.current === 1;
     const total = Math.floor(LOADING_DURATION_MS / TICK_INTERVAL_MS);
     let tick = 0;
     const timer = setInterval(() => {
@@ -274,11 +278,19 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
       setProgress(Math.min(eased, 99.5));
       if (tick >= total) {
         clearInterval(timer);
-        setProgress(100);
-        setPhase("success");
-        setTimeout(() => {
-          cbRef.current();
-        }, SUCCESS_HOLD_MS);
+        if (isFirstAttempt) {
+          setProgress(99.5);
+          setPhase("error");
+        } else {
+          setProgress(100);
+          setPhase("success");
+          setTimeout(() => {
+            setPhase("leaving");
+            setTimeout(() => {
+              cbRef.current();
+            }, LEAVING_FADE_MS);
+          }, SUCCESS_HOLD_MS);
+        }
       }
     }, TICK_INTERVAL_MS);
     return () => {
@@ -309,7 +321,9 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div
+      className={`min-h-screen flex flex-col bg-background transition-opacity duration-500 ${phase === "leaving" ? "opacity-0" : "opacity-100"}`}
+    >
       <a
         href="#loading-content"
         className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-md"
@@ -365,7 +379,7 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
             </div>
           )}
 
-          {phase === "success" && <SuccessAnimation />}
+          {(phase === "success" || phase === "leaving") && <SuccessAnimation />}
           {phase === "error" && <ErrorState onRetry={handleRetry} />}
 
           {phase === "loading" && (
