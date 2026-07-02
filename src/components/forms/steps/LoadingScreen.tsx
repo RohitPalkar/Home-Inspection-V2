@@ -24,11 +24,11 @@ const HELPFUL_TIPS = [
   "The inspection can be completed at your own pace.",
 ] as const;
 
-const LOADING_DURATION_MS = 4500;
+const LOADING_DURATION_MS = 3500;
 const TICK_INTERVAL_MS = 40;
 const STATUS_INTERVAL_MS = 2500;
 const TIP_INTERVAL_MS = 5000;
-const SUCCESS_HOLD_MS = 1200;
+const SUCCESS_HOLD_MS = 1000;
 
 /* ───────────────────────────────────────────
    Types
