@@ -24,7 +24,7 @@ const HELPFUL_TIPS = [
   "The inspection can be completed at your own pace.",
 ] as const;
 
-const LOADING_DURATION_MS = 3500;
+const LOADING_DURATION_MS = 6500;
 const TICK_INTERVAL_MS = 40;
 const STATUS_INTERVAL_MS = 2500;
 const TIP_INTERVAL_MS = 5000;
@@ -198,10 +198,13 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
 
   const mountedRef = useRef(true);
   const cbRef = useRef(onComplete);
+  const attemptRef = useRef(0);
   cbRef.current = onComplete;
 
   useEffect(() => {
     if (phase !== "loading") return;
+    attemptRef.current += 1;
+    const isFirstAttempt = attemptRef.current === 1;
     const total = Math.floor(LOADING_DURATION_MS / TICK_INTERVAL_MS);
     let tick = 0;
     const timer = setInterval(() => {
@@ -211,11 +214,16 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
       setProgress(Math.min(eased, 99.5));
       if (tick >= total) {
         clearInterval(timer);
-        setProgress(100);
-        setPhase("success");
-        setTimeout(() => {
-          if (mountedRef.current) cbRef.current();
-        }, SUCCESS_HOLD_MS);
+        if (isFirstAttempt) {
+          setProgress(99.5);
+          setPhase("error");
+        } else {
+          setProgress(100);
+          setPhase("success");
+          setTimeout(() => {
+            if (mountedRef.current) cbRef.current();
+          }, SUCCESS_HOLD_MS);
+        }
       }
     }, TICK_INTERVAL_MS);
     return () => {
@@ -269,8 +277,17 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
       >
         <div className="w-full max-w-md mx-auto flex flex-col items-center gap-8 sm:gap-10">
           {phase !== "error" && (
-            <div className="w-20 h-20 rounded-2xl bg-primary/10 grid place-items-center">
-              <ShieldCheck className="w-10 h-10 text-primary" aria-hidden="true" />
+            <div className="w-32 h-32 rounded-2xl bg-primary/5 grid place-items-center overflow-hidden">
+              <img
+                src="/loading-illustration.svg"
+                alt=""
+                className="w-full h-full object-contain"
+                onError={(e) => {
+                  const t = e.currentTarget;
+                  t.style.display = "none";
+                  t.parentElement?.classList.add("hidden");
+                }}
+              />
             </div>
           )}
 
