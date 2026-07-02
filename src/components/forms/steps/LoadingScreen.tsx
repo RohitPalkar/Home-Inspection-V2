@@ -5,7 +5,7 @@ import { ShieldCheck, CheckCircle2, RotateCcw, Home } from "lucide-react";
    Constants
    ─────────────────────────────────────────── */
 
-const APP_LOGO = "/branding/app-logo.svg";
+const APP_LOGO = "/images/Waiting Screen/app-logo.jpg";
 const APP_NAME = "Home Inspection";
 
 const STATUS_MESSAGES = [
@@ -199,7 +199,6 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
   const [statusIndex, setStatusIndex] = useState(0);
   const [tipIndex, setTipIndex] = useState(0);
 
-  const mountedRef = useRef(true);
   const cbRef = useRef(onComplete);
   const attemptRef = useRef(0);
   cbRef.current = onComplete;
@@ -224,14 +223,13 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
           setProgress(100);
           setPhase("success");
           setTimeout(() => {
-            if (mountedRef.current) cbRef.current();
+            cbRef.current();
           }, SUCCESS_HOLD_MS);
         }
       }
     }, TICK_INTERVAL_MS);
     return () => {
       clearInterval(timer);
-      mountedRef.current = false;
     };
   }, [phase]);
 
@@ -282,7 +280,7 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
           {phase !== "error" && (
             <div className="w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] md:w-[320px] md:h-[320px] rounded-2xl bg-primary/5 grid place-items-center overflow-hidden">
               <img
-                src="/branding/loading-illustration.svg"
+                src="/images/Waiting Screen/loading-illustration.png"
                 alt=""
                 className="w-full h-full object-contain"
                 onError={(e) => {
