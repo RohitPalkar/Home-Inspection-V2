@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Shell } from "@/components/layout/Shell";
 import { HelpOverlay } from "@/components/common/HelpOverlay";
 import { DefaultHelpBody } from "@/components/common/DefaultHelpBody";
+import { LoadingScreen } from "@/components/forms/steps/LoadingScreen";
 import { WelcomeStep } from "@/components/forms/steps/WelcomeStep";
 import { OptOutStep } from "@/components/forms/steps/OptOutStep";
 import { OptOutConfirmed } from "@/components/forms/steps/OptOutConfirmed";
@@ -80,7 +81,7 @@ function FaqAccordion() {
 }
 
 export function SurveyApp() {
-  const [step, setStep] = useState<StepKey>("welcome");
+  const [step, setStep] = useState<StepKey>("loading");
   const [data, setData] = useState<SurveyData>(initialData);
   const [help, setHelp] = useState<HelpContent | null>(null);
   const [, setHistory] = useState<StepKey[]>([]);
@@ -116,6 +117,10 @@ export function SurveyApp() {
 
   const progress = PROGRESS[step] ?? null;
   const effectiveProgress = step === "verify" && data.editMode ? 5 : progress;
+
+  if (step === "loading") {
+    return <LoadingScreen onComplete={() => setStep("welcome")} />;
+  }
 
   return (
     <>

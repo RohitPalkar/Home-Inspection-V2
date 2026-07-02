@@ -109,6 +109,10 @@ export const CONDITIONAL_PHOTO_REQUIREMENTS: Record<string, PhotoRequirement[]> 
 };
 
 export const SURVEY_SECTIONS: Record<string, SectionConfig> = {
+  loading: {
+    title: "Preparing Your Inspection",
+    subtitle: "Please wait while we prepare your inspection experience.",
+  },
   verify: {
     title: "Verify Property Information",
     subtitle: "Please confirm that this information is correct before proceeding.",

@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 
 export type StepKey =
+  | "loading"
   | "welcome"
   | "optout"
   | "optout-confirmed"
