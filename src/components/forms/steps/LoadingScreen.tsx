@@ -13,15 +13,15 @@ const STATUS_MESSAGES = [
   "Loading your inspection details...",
   "Getting everything ready...",
   "Almost ready...",
-  "Please wait...",
+  "Finalizing your experience...",
 ] as const;
 
 const HELPFUL_TIPS = [
-  "You'll be guided through each step of the inspection.",
-  "Photo guidance will be available whenever it's needed.",
-  "You can review and edit your answers before submitting.",
-  "Take photos in a well-lit area for the best results.",
-  "The inspection can be completed at your own pace.",
+  "Take photos in good lighting for the best results.",
+  "Answer each question as accurately as possible.",
+  "You'll be able to review and edit your answers before submitting.",
+  "Keep your phone ready for photo requests.",
+  "Complete the inspection at your own pace.",
 ] as const;
 
 const LOADING_DURATION_MS = 6500;
@@ -146,7 +146,10 @@ function SuccessAnimation() {
       >
         <CheckCircle2 className="w-8 h-8 text-success" aria-hidden="true" />
       </div>
-      <p className="text-xl font-bold text-foreground">Ready!</p>
+      <p className="text-xl font-bold text-foreground">You&apos;re All Set</p>
+      <p className="mt-2 text-sm text-muted-foreground">
+        Your inspection is ready. We&apos;ll take you to the next step automatically.
+      </p>
     </div>
   );
 }
@@ -163,10 +166,10 @@ function ErrorState({ onRetry }: { onRetry: () => void }) {
       </div>
       <div>
         <p className="text-lg font-bold text-foreground">
-          We couldn&apos;t prepare your inspection.
+          We&apos;re having trouble preparing your inspection
         </p>
         <p className="mt-1.5 text-sm text-muted-foreground">
-          Please check your connection and try again.
+          We couldn&apos;t prepare your inspection at this time. Please try again.
         </p>
       </div>
       <div className="flex flex-col sm:flex-row gap-3 w-full max-w-xs">
@@ -175,7 +178,7 @@ function ErrorState({ onRetry }: { onRetry: () => void }) {
           onClick={onRetry}
           className="flex-1 inline-flex items-center justify-center gap-2 min-h-[48px] rounded-xl bg-primary text-primary-foreground font-semibold hover:bg-primary-hover transition focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
         >
-          <RotateCcw className="w-4 h-4" aria-hidden="true" /> Retry
+          <RotateCcw className="w-4 h-4" aria-hidden="true" /> Try Again
         </button>
         <button
           onClick={() => {
@@ -183,7 +186,7 @@ function ErrorState({ onRetry }: { onRetry: () => void }) {
           }}
           className="flex-1 inline-flex items-center justify-center gap-2 min-h-[48px] rounded-xl border-2 border-border bg-card text-foreground font-semibold hover:bg-muted transition focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
         >
-          <Home className="w-4 h-4" aria-hidden="true" /> Exit
+          <Home className="w-4 h-4" aria-hidden="true" /> Exit Inspection
         </button>
       </div>
     </div>
@@ -294,11 +297,11 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
           {phase === "loading" && (
             <div className="text-center space-y-2">
               <h1 className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight">
-                Preparing Your Inspection
+                Preparing Your Home Inspection
               </h1>
               <p className="text-sm sm:text-base text-muted-foreground max-w-sm mx-auto leading-relaxed">
-                Please wait while we prepare your inspection experience. This usually takes just a
-                few seconds.
+                We&apos;re getting everything ready for your inspection. This usually takes less
+                than a minute.
               </p>
             </div>
           )}
@@ -325,8 +328,8 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
           >
             <ShieldCheck className="w-4 h-4 shrink-0" aria-hidden="true" />
             <p className="text-xs sm:text-sm text-center">
-              Your information is secure and private. We use industry-standard encryption to protect
-              your information.
+              Your information is protected. Your responses and photos are securely handled
+              throughout the inspection process.
             </p>
           </div>
         </div>
