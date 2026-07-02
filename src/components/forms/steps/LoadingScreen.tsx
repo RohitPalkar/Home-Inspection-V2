@@ -5,7 +5,7 @@ import { ShieldCheck, CheckCircle2, RotateCcw, Home } from "lucide-react";
    Constants
    ─────────────────────────────────────────── */
 
-const APP_LOGO = "/images/Waiting Screen/app-logo.jpg";
+const APP_LOGO = "/images/Waiting Screen/logo.jpg";
 const APP_NAME = "Home Inspection";
 
 const STATUS_MESSAGES = [
@@ -16,18 +16,38 @@ const STATUS_MESSAGES = [
   "Finalizing your experience...",
 ] as const;
 
-const HELPFUL_TIPS = [
-  "Take photos in good lighting for the best results.",
-  "Answer each question as accurately as possible.",
-  "You'll be able to review and edit your answers before submitting.",
-  "Keep your phone ready for photo requests.",
-  "Complete the inspection at your own pace.",
-] as const;
+interface Tip {
+  title: string;
+  description: string;
+}
+
+const HELPFUL_TIPS: Tip[] = [
+  {
+    title: "Take photos in good lighting.",
+    description: "Natural daylight helps produce clearer images.",
+  },
+  {
+    title: "Answer each question carefully.",
+    description: "Providing accurate information helps speed up the review.",
+  },
+  {
+    title: "Review before submitting.",
+    description: "You'll be able to edit your answers before submission.",
+  },
+  {
+    title: "Have your phone ready.",
+    description: "Some questions will ask you to capture photos.",
+  },
+  {
+    title: "Take your time.",
+    description: "Complete the inspection at your own pace.",
+  },
+];
 
 const LOADING_DURATION_MS = 6500;
 const TICK_INTERVAL_MS = 40;
 const STATUS_INTERVAL_MS = 2500;
-const TIP_INTERVAL_MS = 5000;
+const TIP_INTERVAL_MS = 4500;
 const SUCCESS_HOLD_MS = 1000;
 
 /* ───────────────────────────────────────────
@@ -40,6 +60,10 @@ interface LoadingScreenProps {
   onComplete: () => void;
 }
 
+/* ───────────────────────────────────────────
+   Progress Bar
+   ─────────────────────────────────────────── */
+
 function ProgressBar({ value, phase }: { value: number; phase: Phase }) {
   const rm =
     typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -50,7 +74,7 @@ function ProgressBar({ value, phase }: { value: number; phase: Phase }) {
       aria-valuenow={phase === "success" ? 100 : Math.round(value)}
       aria-valuemin={0}
       aria-valuemax={100}
-      aria-label={`Progress ${phase === "success" ? 100 : Math.round(value)}%`}
+      aria-label="Loading progress"
     >
       <div
         className="h-full rounded-full transition-all duration-300 ease-out relative"
@@ -71,6 +95,10 @@ function ProgressBar({ value, phase }: { value: number; phase: Phase }) {
     </div>
   );
 }
+
+/* ───────────────────────────────────────────
+   Logo
+   ─────────────────────────────────────────── */
 
 function LogoArea() {
   const [err, setErr] = useState(false);
@@ -97,6 +125,10 @@ function LogoArea() {
   );
 }
 
+/* ───────────────────────────────────────────
+   Status Messages
+   ─────────────────────────────────────────── */
+
 function StatusMessage({ index }: { index: number }) {
   return (
     <div className="relative h-6" aria-live="polite" aria-atomic="true">
@@ -113,28 +145,37 @@ function StatusMessage({ index }: { index: number }) {
   );
 }
 
+/* ───────────────────────────────────────────
+   Tip Card
+   ─────────────────────────────────────────── */
+
 function TipCard({ index }: { index: number }) {
   return (
     <div
-      className="relative bg-card border border-border rounded-xl p-4 shadow-card min-h-[80px]"
+      className="relative bg-card border border-border rounded-xl p-4 shadow-card min-h-[88px]"
       aria-live="polite"
       aria-atomic="true"
     >
       {HELPFUL_TIPS.map((tip, i) => (
         <div
-          key={tip}
+          key={tip.title}
           className={`transition-all duration-500 ${i === index ? "opacity-100 scale-100" : "opacity-0 scale-95 absolute inset-0 p-4 pointer-events-none"}`}
           aria-hidden={i !== index}
         >
           <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1">
             Tip
           </p>
-          <p className="text-sm text-foreground">{tip}</p>
+          <p className="text-sm font-medium text-foreground">{tip.title}</p>
+          <p className="text-sm text-muted-foreground mt-0.5">{tip.description}</p>
         </div>
       ))}
     </div>
   );
 }
+
+/* ───────────────────────────────────────────
+   Success Animation
+   ─────────────────────────────────────────── */
 
 function SuccessAnimation() {
   const rm =
@@ -147,12 +188,16 @@ function SuccessAnimation() {
         <CheckCircle2 className="w-8 h-8 text-success" aria-hidden="true" />
       </div>
       <p className="text-xl font-bold text-foreground">You&apos;re All Set</p>
-      <p className="mt-2 text-sm text-muted-foreground">
+      <p className="text-sm text-muted-foreground">
         Your inspection is ready. We&apos;ll take you to the next step automatically.
       </p>
     </div>
   );
 }
+
+/* ───────────────────────────────────────────
+   Error State
+   ─────────────────────────────────────────── */
 
 function ErrorState({ onRetry }: { onRetry: () => void }) {
   const ref = useRef<HTMLButtonElement>(null);
@@ -161,15 +206,26 @@ function ErrorState({ onRetry }: { onRetry: () => void }) {
   }, []);
   return (
     <div className="flex flex-col items-center gap-6 text-center">
-      <div className="w-16 h-16 rounded-full bg-destructive/10 grid place-items-center">
-        <div className="w-8 h-0.5 rounded-full bg-destructive rotate-45" aria-hidden="true" />
+      <div className="w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] md:w-[320px] md:h-[320px] rounded-2xl bg-primary/5 grid place-items-center overflow-hidden">
+        <img
+          src="/images/Waiting Screen/Illustration.png"
+          alt=""
+          className="w-full h-full object-contain"
+          onError={(e) => {
+            const t = e.currentTarget;
+            t.style.display = "none";
+            t.parentElement?.classList.add("hidden");
+          }}
+        />
       </div>
       <div>
         <p className="text-lg font-bold text-foreground">
-          We&apos;re having trouble preparing your inspection
+          We&apos;re having trouble preparing your inspection.
         </p>
         <p className="mt-1.5 text-sm text-muted-foreground">
-          We couldn&apos;t prepare your inspection at this time. Please try again.
+          We couldn&apos;t prepare your inspection at this time.
+          <br />
+          Please try again.
         </p>
       </div>
       <div className="flex flex-col sm:flex-row gap-3 w-full max-w-xs">
@@ -189,9 +245,14 @@ function ErrorState({ onRetry }: { onRetry: () => void }) {
           <Home className="w-4 h-4" aria-hidden="true" /> Exit Inspection
         </button>
       </div>
+      <p className="text-xs text-muted-foreground">No information has been submitted yet.</p>
     </div>
   );
 }
+
+/* ───────────────────────────────────────────
+   Loading Screen
+   ─────────────────────────────────────────── */
 
 export function LoadingScreen({ onComplete }: LoadingScreenProps) {
   const [phase, setPhase] = useState<Phase>("loading");
@@ -200,13 +261,10 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
   const [tipIndex, setTipIndex] = useState(0);
 
   const cbRef = useRef(onComplete);
-  const attemptRef = useRef(0);
   cbRef.current = onComplete;
 
   useEffect(() => {
     if (phase !== "loading") return;
-    attemptRef.current += 1;
-    const isFirstAttempt = attemptRef.current === 1;
     const total = Math.floor(LOADING_DURATION_MS / TICK_INTERVAL_MS);
     let tick = 0;
     const timer = setInterval(() => {
@@ -216,16 +274,11 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
       setProgress(Math.min(eased, 99.5));
       if (tick >= total) {
         clearInterval(timer);
-        if (isFirstAttempt) {
-          setProgress(99.5);
-          setPhase("error");
-        } else {
-          setProgress(100);
-          setPhase("success");
-          setTimeout(() => {
-            cbRef.current();
-          }, SUCCESS_HOLD_MS);
-        }
+        setProgress(100);
+        setPhase("success");
+        setTimeout(() => {
+          cbRef.current();
+        }, SUCCESS_HOLD_MS);
       }
     }, TICK_INTERVAL_MS);
     return () => {
@@ -280,7 +333,7 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
           {phase !== "error" && (
             <div className="w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] md:w-[320px] md:h-[320px] rounded-2xl bg-primary/5 grid place-items-center overflow-hidden">
               <img
-                src="/images/Waiting Screen/loading-illustration.png"
+                src="/images/Waiting Screen/Illustration.png"
                 alt=""
                 className="w-full h-full object-contain"
                 onError={(e) => {
@@ -298,8 +351,9 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
                 Preparing Your Home Inspection
               </h1>
               <p className="text-sm sm:text-base text-muted-foreground max-w-sm mx-auto leading-relaxed">
-                We&apos;re getting everything ready for your inspection. This usually takes less
-                than a minute.
+                We&apos;re getting everything ready for your inspection.
+                <br />
+                This usually takes just a few seconds.
               </p>
             </div>
           )}
@@ -320,15 +374,14 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
             </div>
           )}
 
-          <div
-            className="flex items-center justify-center gap-2 text-muted-foreground"
-            aria-live="polite"
-          >
-            <ShieldCheck className="w-4 h-4 shrink-0" aria-hidden="true" />
-            <p className="text-xs sm:text-sm text-center">
-              Your information is protected. Your responses and photos are securely handled
-              throughout the inspection process.
-            </p>
+          <div className="flex items-start justify-center gap-2.5 text-muted-foreground">
+            <ShieldCheck className="w-4 h-4 shrink-0 mt-0.5" aria-hidden="true" />
+            <div className="text-xs sm:text-sm text-center leading-relaxed">
+              <p className="font-semibold text-foreground">Your information is protected</p>
+              <p>
+                Your responses and photos are securely handled throughout the inspection process.
+              </p>
+            </div>
           </div>
         </div>
       </main>

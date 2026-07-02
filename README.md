@@ -4,14 +4,14 @@ A guided survey application for documenting property conditions for insurance pu
 
 ## Tech Stack
 
-| Technology | Purpose |
-|------------|---------|
-| **React 19** | UI framework |
-| **Vite 8** | Build tool and dev server |
-| **TypeScript** | Type safety |
-| **React Router 7** | Client-side routing |
-| **Tailwind CSS 4** | Utility-first styling |
-| **Lucide React** | Icon library |
+| Technology         | Purpose                   |
+| ------------------ | ------------------------- |
+| **React 19**       | UI framework              |
+| **Vite 8**         | Build tool and dev server |
+| **TypeScript**     | Type safety               |
+| **React Router 7** | Client-side routing       |
+| **Tailwind CSS 4** | Utility-first styling     |
+| **Lucide React**   | Icon library              |
 
 ## Prerequisites
 
@@ -32,13 +32,13 @@ The app will be available at `http://localhost:5173` by default.
 
 ## Scripts
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start Vite dev server with HMR |
-| `npm run build` | TypeScript check + production build |
-| `npm run preview` | Preview production build locally |
-| `npm run lint` | Run ESLint across all source files |
-| `npm run format` | Format all source files with Prettier |
+| Command           | Description                           |
+| ----------------- | ------------------------------------- |
+| `npm run dev`     | Start Vite dev server with HMR        |
+| `npm run build`   | TypeScript check + production build   |
+| `npm run preview` | Preview production build locally      |
+| `npm run lint`    | Run ESLint across all source files    |
+| `npm run format`  | Format all source files with Prettier |
 
 ## Project Structure
 
@@ -128,21 +128,25 @@ dist/
 Deploy the `dist/` folder to any static hosting provider:
 
 ### Vercel
+
 ```bash
 npx vercel dist
 ```
 
 ### Netlify
+
 ```bash
 npx netlify deploy --dir=dist
 ```
 
 ### Cloudflare Pages
+
 ```bash
 npx wrangler pages deploy dist
 ```
 
 ### GitHub Pages
+
 ```bash
 npx gh-pages -d dist
 ```
@@ -161,14 +165,14 @@ The application maintains WCAG 2.2 AA compliance:
 
 ## Browser Support
 
-| Browser | Supported |
-|---------|-----------|
-| Chrome (latest 2) | ✓ |
-| Firefox (latest 2) | ✓ |
-| Safari (latest 2) | ✓ |
-| Edge (latest 2) | ✓ |
-| iOS Safari | ✓ |
-| Android Chrome | ✓ |
+| Browser            | Supported |
+| ------------------ | --------- |
+| Chrome (latest 2)  | ✓         |
+| Firefox (latest 2) | ✓         |
+| Safari (latest 2)  | ✓         |
+| Edge (latest 2)    | ✓         |
+| iOS Safari         | ✓         |
+| Android Chrome     | ✓         |
 
 ## Migration
 
