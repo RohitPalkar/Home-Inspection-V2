@@ -5,7 +5,7 @@ import { ShieldCheck, CheckCircle2, RotateCcw, Home } from "lucide-react";
    Constants
    ─────────────────────────────────────────── */
 
-const APP_LOGO = "/logo.svg";
+const APP_LOGO = "/branding/app-logo.svg";
 const APP_NAME = "Home Inspection";
 
 const STATUS_MESSAGES = [
@@ -76,7 +76,7 @@ function LogoArea() {
   const [err, setErr] = useState(false);
   return (
     <div className="flex justify-center" aria-label="Application logo">
-      <div className="h-12 md:h-14 w-auto flex items-center justify-center">
+      <div className="h-12 sm:h-[52px] md:h-[56px] w-auto flex items-center justify-center">
         {err ? (
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-full bg-primary grid place-items-center shrink-0">
@@ -88,7 +88,7 @@ function LogoArea() {
           <img
             src={APP_LOGO}
             alt="Application Logo"
-            className="h-10 sm:h-12 md:h-14 w-auto object-contain"
+            className="h-12 sm:h-[52px] md:h-[56px] w-auto object-contain"
             onError={() => setErr(true)}
           />
         )}
@@ -146,7 +146,7 @@ function SuccessAnimation() {
       >
         <CheckCircle2 className="w-8 h-8 text-success" aria-hidden="true" />
       </div>
-      <p className="text-xl font-bold text-foreground">Your inspection is ready</p>
+      <p className="text-xl font-bold text-foreground">Ready!</p>
     </div>
   );
 }
@@ -277,9 +277,9 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
       >
         <div className="w-full max-w-md mx-auto flex flex-col items-center gap-8 sm:gap-10">
           {phase !== "error" && (
-            <div className="w-32 h-32 rounded-2xl bg-primary/5 grid place-items-center overflow-hidden">
+            <div className="w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] md:w-[320px] md:h-[320px] rounded-2xl bg-primary/5 grid place-items-center overflow-hidden">
               <img
-                src="/loading-illustration.svg"
+                src="/branding/loading-illustration.svg"
                 alt=""
                 className="w-full h-full object-contain"
                 onError={(e) => {
@@ -318,6 +318,17 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
               <TipCard index={tipIndex} />
             </div>
           )}
+
+          <div
+            className="flex items-center justify-center gap-2 text-muted-foreground"
+            aria-live="polite"
+          >
+            <ShieldCheck className="w-4 h-4 shrink-0" aria-hidden="true" />
+            <p className="text-xs sm:text-sm text-center">
+              Your information is secure and private. We use industry-standard encryption to protect
+              your information.
+            </p>
+          </div>
         </div>
       </main>
     </div>
