@@ -233,15 +233,17 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
   const [progress, setProgress] = useState(0);
   const [statusIndex, setStatusIndex] = useState(0);
   const [tipIndex, setTipIndex] = useState(0);
+  const [hasAttempted, setHasAttempted] = useState(false);
 
   const cbRef = useRef(onComplete);
-  const attemptRef = useRef(0);
+  const loadingKeyRef = useRef(0);
   cbRef.current = onComplete;
 
   useEffect(() => {
     if (phase !== "loading") return;
-    attemptRef.current += 1;
-    const isFirstAttempt = attemptRef.current === 1;
+    loadingKeyRef.current += 1;
+    const key = loadingKeyRef.current;
+    const isFirstAttempt = !hasAttempted;
     const total = Math.floor(LOADING_DURATION_MS / TICK_INTERVAL_MS);
     let tick = 0;
     const timer = setInterval(() => {
@@ -254,15 +256,18 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
         if (isFirstAttempt) {
           setProgress(99.5);
           setPhase("error");
+          setHasAttempted(true);
         } else {
           cbRef.current();
         }
       }
     }, TICK_INTERVAL_MS);
     return () => {
-      clearInterval(timer);
+      if (key === loadingKeyRef.current) {
+        clearInterval(timer);
+      }
     };
-  }, [phase]);
+  }, [phase, hasAttempted]);
 
   useEffect(() => {
     if (phase !== "loading") return;
