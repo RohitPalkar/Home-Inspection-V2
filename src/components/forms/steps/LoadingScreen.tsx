@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { ShieldCheck, CheckCircle2, RotateCcw, Home } from "lucide-react";
+import { ShieldCheck, RotateCcw, Home } from "lucide-react";
 
 /* ───────────────────────────────────────────
    Constants
@@ -48,14 +48,12 @@ const LOADING_DURATION_MS = 6500;
 const TICK_INTERVAL_MS = 40;
 const STATUS_INTERVAL_MS = 2500;
 const TIP_INTERVAL_MS = 4500;
-const SUCCESS_HOLD_MS = 1000;
-const LEAVING_FADE_MS = 400;
 
 /* ───────────────────────────────────────────
    Types
    ─────────────────────────────────────────── */
 
-type Phase = "loading" | "success" | "leaving" | "error";
+type Phase = "loading" | "error";
 
 interface LoadingScreenProps {
   onComplete: () => void;
@@ -65,15 +63,14 @@ interface LoadingScreenProps {
    Progress Bar
    ─────────────────────────────────────────── */
 
-function ProgressBar({ value, phase }: { value: number; phase: Phase }) {
+function ProgressBar({ value }: { value: number }) {
   const rm =
     typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const isComplete = phase === "success" || phase === "leaving";
   return (
     <div
       className="relative w-full h-2.5 rounded-full bg-muted overflow-hidden"
       role="progressbar"
-      aria-valuenow={isComplete ? 100 : Math.round(value)}
+      aria-valuenow={Math.round(value)}
       aria-valuemin={0}
       aria-valuemax={100}
       aria-label="Loading progress"
@@ -81,13 +78,11 @@ function ProgressBar({ value, phase }: { value: number; phase: Phase }) {
       <div
         className="h-full rounded-full transition-all duration-300 ease-out relative"
         style={{
-          width: `${isComplete ? 100 : value}%`,
-          background: isComplete
-            ? "var(--color-success)"
-            : "linear-gradient(90deg, var(--color-primary), var(--color-primary-hover))",
+          width: `${value}%`,
+          background: "linear-gradient(90deg, var(--color-primary), var(--color-primary-hover))",
         }}
       >
-        {phase === "loading" && !rm && (
+        {!rm && (
           <div className="absolute inset-0 rounded-full overflow-hidden" aria-hidden="true">
             <div className="absolute inset-0 shimmer-slide" />
           </div>
@@ -170,28 +165,6 @@ function TipCard({ index }: { index: number }) {
           <p className="text-sm text-muted-foreground mt-0.5">{tip.description}</p>
         </div>
       ))}
-    </div>
-  );
-}
-
-/* ───────────────────────────────────────────
-   Success Animation
-   ─────────────────────────────────────────── */
-
-function SuccessAnimation() {
-  const rm =
-    typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  return (
-    <div className="flex flex-col items-center gap-3">
-      <div
-        className={`w-16 h-16 rounded-full bg-success/15 grid place-items-center ${rm ? "" : "animate-success-check"}`}
-      >
-        <CheckCircle2 className="w-8 h-8 text-success" aria-hidden="true" />
-      </div>
-      <p className="text-xl font-bold text-foreground">You&apos;re All Set</p>
-      <p className="text-sm text-muted-foreground">
-        Your inspection is ready. We&apos;ll take you to the next step automatically.
-      </p>
     </div>
   );
 }
@@ -282,14 +255,7 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
           setProgress(99.5);
           setPhase("error");
         } else {
-          setProgress(100);
-          setPhase("success");
-          setTimeout(() => {
-            setPhase("leaving");
-            setTimeout(() => {
-              cbRef.current();
-            }, LEAVING_FADE_MS);
-          }, SUCCESS_HOLD_MS);
+          cbRef.current();
         }
       }
     }, TICK_INTERVAL_MS);
@@ -321,9 +287,7 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
   }, []);
 
   return (
-    <div
-      className={`min-h-screen flex flex-col bg-background transition-opacity duration-500 ${phase === "leaving" ? "opacity-0" : "opacity-100"}`}
-    >
+    <div className="min-h-screen flex flex-col bg-background">
       <a
         href="#loading-content"
         className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-md"
@@ -374,12 +338,11 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
 
           {phase !== "error" && (
             <div className="w-full space-y-4">
-              <ProgressBar value={progress} phase={phase} />
+              <ProgressBar value={progress} />
               {phase === "loading" && <StatusMessage index={statusIndex} />}
             </div>
           )}
 
-          {(phase === "success" || phase === "leaving") && <SuccessAnimation />}
           {phase === "error" && <ErrorState onRetry={handleRetry} />}
 
           {phase === "loading" && (
