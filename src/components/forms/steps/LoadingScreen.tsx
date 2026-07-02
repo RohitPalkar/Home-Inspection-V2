@@ -146,7 +146,7 @@ function SuccessAnimation() {
       >
         <CheckCircle2 className="w-8 h-8 text-success" aria-hidden="true" />
       </div>
-      <p className="text-xl font-bold text-foreground">Ready!</p>
+      <p className="text-xl font-bold text-foreground">Your inspection is ready</p>
     </div>
   );
 }
